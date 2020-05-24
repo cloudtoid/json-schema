@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(AppDotNetVersion)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Cloudtoid.Json.Schema\Cloudtoid.Json.Schema.csproj" />
+  </ItemGroup>
+
+</Project>

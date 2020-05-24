@@ -1,0 +1,27 @@
+name: publish
+
+on:
+  push:
+    branches: [ master ]
+  
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.201
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore src/Cloudtoid.Json.Schema/Cloudtoid.Json.Schema.csproj
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+    - name: Pack
+      run: dotnet pack --configuration Release --no-build --output . --version-suffix ${{github.run_number}} src/Cloudtoid.Json.Schema/Cloudtoid.Json.Schema.csproj 
+    - name: Push
+      run: dotnet nuget push Cloudtoid.Json.Schema.*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.nuget_org_api_key }}

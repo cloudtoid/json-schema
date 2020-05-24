@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>$(LibraryDotNetVersion)</TargetFramework>
+  </PropertyGroup>
+
+  <!-- NuGet Packaging -->
+  <PropertyGroup>
+    <PackageId>Cloudtoid.Json.Schema</PackageId>
+    <Title>Cloudtoid.Json.Schema</Title>
+    <Authors>pedram@rezaei.us</Authors>
+    <Company>cloudtoid</Company>
+    <PackageDescription>A modern set of JSON Schema utilities for .NET Core and beyond</PackageDescription>
+    <Copyright>Copyright (c) Cloudtoid</Copyright>
+    <RepositoryUrl>https://github.com/cloudtoid/json-schema/</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/cloudtoid/json-schema/blob/master/README.md</PackageProjectUrl>
+    <IsPackable>true</IsPackable>
+    <PackageTags>json;json schema;schema;schema generator</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <VersionSuffix Condition=" '$(VersionSuffix)'=='' ">0</VersionSuffix>
+    <Version>1.0.$(VersionSuffix)</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Build\Cloudtoid.Json.Schema.targets" PackagePath="build" />
+    <Content Include="Build\Cloudtoid.Json.Schema.props" PackagePath="build" />
+  </ItemGroup>
+
+</Project>
