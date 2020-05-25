@@ -48,5 +48,19 @@
         /// </list>
         /// </summary>
         public string? Format { get; set; }
+
+        /// <summary>
+        /// Gets or sets the encoding that is used to restrict the value of this string.
+        /// The acceptable values are <c>7bit</c>, <c>8bit</c>, <c>binary</c>, <c>quoted-printable</c> and <c>base64</c>. If not specified,
+        /// the encoding is the same as the containing JSON document.
+        /// </summary>
+        public string? ContentEncoding { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <c>contentMediaType</c> keyword specifies the MIME type of the contents of a string, as described in RFC 2046.
+        /// There is a list of MIME types officially registered by the IANA, but the set of types supported will be application and operating
+        /// system dependent.
+        /// </summary>
+        public string? ContentMediaType { get; set; }
     }
 }
