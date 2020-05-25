@@ -4,6 +4,10 @@
     <TargetFramework>$(LibraryDotNetVersion)</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
+  </ItemGroup>
+
   <!-- NuGet Packaging -->
   <PropertyGroup>
     <PackageId>Cloudtoid.Json.Schema</PackageId>
@@ -15,7 +19,7 @@
     <RepositoryUrl>https://github.com/cloudtoid/json-schema/</RepositoryUrl>
     <PackageProjectUrl>https://github.com/cloudtoid/json-schema/blob/master/README.md</PackageProjectUrl>
     <IsPackable>true</IsPackable>
-    <PackageTags>json;json schema;schema;schema generator</PackageTags>
+    <PackageTags>json;json schema;schema;jsonschema;schema generator;schemagen</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <VersionSuffix Condition=" '$(VersionSuffix)'=='' ">0</VersionSuffix>
     <Version>1.0.$(VersionSuffix)</Version>
