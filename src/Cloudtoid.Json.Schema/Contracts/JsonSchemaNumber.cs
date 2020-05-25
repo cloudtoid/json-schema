@@ -21,7 +21,7 @@
         public double? MultipleOf
         {
             get => multipleOf;
-            set => multipleOf = value is null ? default : Contract.CheckGreaterThanOrEqual(value.Value, 0.0, nameof(MultipleOf));
+            set => multipleOf = value is null ? default : Contract.CheckGreaterThanl(value.Value, 0.0, nameof(MultipleOf));
         }
 
         /// <summary>
