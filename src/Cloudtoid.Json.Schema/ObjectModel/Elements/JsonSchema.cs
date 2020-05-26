@@ -14,6 +14,13 @@
             Version = version;
         }
 
+        public JsonSchema(
+            JsonSchemaConstraints constraints,
+            JsonSchemaMetadata? metadata)
+            : this(JsonSchemaVersionLookup.LatestSupportedVersion, constraints, metadata)
+        {
+        }
+
         public virtual JsonSchemaVersion Version { get; }
 
         protected internal override void Accept(JsonSchemaVisitor visitor)

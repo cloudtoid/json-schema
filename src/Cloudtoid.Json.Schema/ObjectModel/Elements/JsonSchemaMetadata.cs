@@ -12,7 +12,7 @@
             string? description = null,
             string? comment = null,
             JsonElement? @default = null,
-            IReadOnlyCollection<JsonElement>? examples = null)
+            IReadOnlyCollection<object>? examples = null)
         {
             Id = id;
             Title = title;
@@ -32,6 +32,6 @@
 
         public JsonElement? Default { get; }
 
-        public IReadOnlyCollection<JsonElement>? Examples { get; }
+        public IReadOnlyCollection<object>? Examples { get; }
     }
 }

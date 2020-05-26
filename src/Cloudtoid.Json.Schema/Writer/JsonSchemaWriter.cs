@@ -9,7 +9,7 @@
     /// <summary>
     /// Provides a high-performance API for forward-only, non-cached writing of UTF-8 encoded Json Schema text.
     /// </summary>
-    public sealed class JsonSchemaWriter : IDisposable, IAsyncDisposable
+    public sealed partial class JsonSchemaWriter : IDisposable, IAsyncDisposable
     {
         private Utf8JsonWriter? writer;
 
