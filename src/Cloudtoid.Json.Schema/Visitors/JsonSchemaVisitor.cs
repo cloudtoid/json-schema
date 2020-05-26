@@ -154,39 +154,34 @@
             // visit children
 
             if (constraint.Contains != null)
-                Visit(constraint.Contains);
+                VisitArrayContains(constraint.Contains);
 
             if (constraint.Items != null)
-                Visit(constraint.Items);
+                VisitArrayItems(constraint.Items);
         }
 
-        protected virtual void VisitArraySingleItem(JsonSchemaArrayItems items)
-        {
-            // no-op
-        }
+        protected virtual void VisitArrayContains(JsonSchemaChildElement constraint)
+            => Visit(constraint);
+
+        protected virtual void VisitArrayItems(JsonSchemaArrayItems items)
+            => Visit(items);
 
         protected internal virtual void VisitArraySingleItem(JsonSchemaArraySingleItem item)
-        {
-            // visit self
-            VisitArraySingleItem(item);
-
-            // visit children
-
-            Visit(item.Item);
-        }
+            => Visit(item.Item);
 
         protected internal virtual void VisitArrayArrayItems(JsonSchemaArrayArrayItems items)
         {
-            // visit self
-            VisitArraySingleItem(items);
-
-            // visit children
-
             foreach (var item in items.Items)
-                Visit(item);
+                VisitArrayArrayItem(item);
 
             if (items.AdditionalItems != null)
-                Visit(items.AdditionalItems);
+                VisitArrayAdditionalItems(items.AdditionalItems);
         }
+
+        protected internal virtual void VisitArrayArrayItem(JsonSchemaChildElement item)
+            => Visit(item);
+
+        protected virtual void VisitArrayAdditionalItems(JsonSchemaChildElement items)
+            => Visit(items);
     }
 }
