@@ -2,9 +2,9 @@
 {
     using static Contract;
 
-    public class JsonSchemaIfThenElse : JsonSchemaConstraint
+    public class JsonSchemaConditional : JsonSchemaConstraint
     {
-        public JsonSchemaIfThenElse(
+        public JsonSchemaConditional(
             JsonSchemaConstraint @if,
             JsonSchemaConstraint then,
             JsonSchemaConstraint? @else)
@@ -19,5 +19,8 @@
         public JsonSchemaConstraint Then { get; }
 
         public JsonSchemaConstraint? Else { get; }
+
+        protected internal override void Accept(JsonSchemaVisitor visitor)
+            => visitor.VisitConditional(this);
     }
 }

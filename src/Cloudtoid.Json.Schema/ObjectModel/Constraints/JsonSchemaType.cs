@@ -1,12 +1,15 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
-    public enum JsonSchemaType : byte
+    public class JsonSchemaType : JsonSchemaConstraint
     {
-        Null = 1,
-        Object = 2,
-        Array = 3,
-        String = 4,
-        Number = 5,
-        Boolean = 6
+        public JsonSchemaType(JsonSchemaDataType type)
+        {
+            Type = type;
+        }
+
+        public virtual JsonSchemaDataType Type { get; }
+
+        protected internal override void Accept(JsonSchemaVisitor visitor)
+            => visitor.VisitType(this);
     }
 }

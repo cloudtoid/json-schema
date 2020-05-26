@@ -9,6 +9,9 @@
             Not = CheckValue(not, nameof(not));
         }
 
-        public JsonSchemaConstraint Not { get; }
+        public virtual JsonSchemaConstraint Not { get; }
+
+        protected internal override void Accept(JsonSchemaVisitor visitor)
+            => visitor.VisitNot(this);
     }
 }

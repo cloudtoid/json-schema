@@ -12,5 +12,8 @@
         }
 
         public JsonElement Element { get; }
+
+        protected internal override void Accept(JsonSchemaVisitor visitor)
+            => visitor.VisitConstant(this);
     }
 }

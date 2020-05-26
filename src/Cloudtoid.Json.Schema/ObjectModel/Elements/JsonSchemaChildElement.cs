@@ -1,22 +1,18 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
     /// <summary>
-    /// This is the root element in a Json Schema.
+    /// This represents all Json Schema elements except for the root element which is <see cref="JsonSchema"/>.
     /// </summary>
-    public class JsonSchema : JsonSchemaElement
+    public class JsonSchemaChildElement : JsonSchemaElement
     {
-        public JsonSchema(
-            JsonSchemaVersion version,
+        public JsonSchemaChildElement(
             JsonSchemaConstraints constraints,
             JsonSchemaMetadata? metadata)
             : base(constraints, metadata)
         {
-            Version = version;
         }
 
-        public virtual JsonSchemaVersion Version { get; }
-
         protected internal override void Accept(JsonSchemaVisitor visitor)
-            => visitor.VisitSchema(this);
+            => visitor.VisitChildElement(this);
     }
 }

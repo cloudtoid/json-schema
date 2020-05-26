@@ -1,9 +1,9 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
     // the following restrictions can only be applied to json values of type string
-    public class JsonSchemaStringConstraint : JsonSchemaConstraint
+    public class JsonSchemaString : JsonSchemaConstraint
     {
-        public JsonSchemaStringConstraint(
+        public JsonSchemaString(
             uint? minLength,
             uint? maxLength,
             string? pattern,
@@ -22,19 +22,19 @@
         /// <summary>
         /// Gets the minimum length of the string. It uses the <c>minLength</c> keyword and its value must be a non-negative number.
         /// </summary>
-        public uint? MinLength { get; }
+        public virtual uint? MinLength { get; }
 
         /// <summary>
         /// Gets the maximum length of the string. It uses the <c>maxLength</c> keyword and its value must be a non-negative number.
         /// </summary>
-        public uint? MaxLength { get; }
+        public virtual uint? MaxLength { get; }
 
         /// <summary>
         /// Gets the regular expression pattern that is used to restrict the value of this string.
         /// The complex syntax of regular expression in JavaScript is supported here, but that complete syntax is not widely supported.
         /// Therefore, it is recommended to use the subset of that syntax described <a href="https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#regular-expressions">here</a>.
         /// </summary>
-        public string? Pattern { get; }
+        public virtual string? Pattern { get; }
 
         /// <summary>
         /// Gets the format string which enforces basic semantic validation on certain kinds of string values that are commonly used.
@@ -59,20 +59,23 @@
         /// <item><term>iri-reference</term>A string is valid against this format if it represents a valid IRI reference.</item>
         /// </list>
         /// </summary>
-        public string? Format { get; }
+        public virtual string? Format { get; }
 
         /// <summary>
         /// Gets the encoding that is used to restrict the value of this string.
         /// The acceptable values are <c>7bit</c>, <c>8bit</c>, <c>binary</c>, <c>quoted-printable</c> and <c>base64</c>. If not specified,
         /// the encoding is the same as the containing JSON document.
         /// </summary>
-        public string? ContentEncoding { get; }
+        public virtual string? ContentEncoding { get; }
 
         /// <summary>
         /// Gets the <c>contentMediaType</c> keyword specifies the MIME type of the contents of a string, as described in RFC 2046.
         /// There is a list of MIME types officially registered by the IANA, but the set of types supported will be application and operating
         /// system dependent.
         /// </summary>
-        public string? ContentMediaType { get; }
+        public virtual string? ContentMediaType { get; }
+
+        protected internal override void Accept(JsonSchemaVisitor visitor)
+            => visitor.VisitString(this);
     }
 }

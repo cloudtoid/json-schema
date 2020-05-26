@@ -3,9 +3,9 @@
     using static Contract;
 
     // the following restrictions can only be applied to json values of type number
-    public class JsonSchemaNumberConstraint : JsonSchemaConstraint
+    public class JsonSchemaNumber : JsonSchemaConstraint
     {
-        public JsonSchemaNumberConstraint(
+        public JsonSchemaNumber(
             double? multipleOf,
             JsonSchemaNumberRange? range)
         {
@@ -17,13 +17,16 @@
         /// Gets a multiple of a given number to restrict the valid values.
         /// This uses the <c>multipleOf</c> keyword and may only be a positive number.
         /// </summary>
-        public double? MultipleOf { get; }
+        public virtual double? MultipleOf { get; }
 
         /// <summary>
         /// Gets the valid range for this number using a combination of the <c>minimum</c>,
         /// <c>exclusiveMinimum</c>, <c>maximum</c>, and <c>exclusiveMaximum</c> keywords.
         /// </summary>
-        public JsonSchemaNumberRange? Range { get; }
+        public virtual JsonSchemaNumberRange? Range { get; }
+
+        protected internal override void Accept(JsonSchemaVisitor visitor)
+            => visitor.VisitNumber(this);
     }
 
     public sealed class JsonSchemaNumberRange

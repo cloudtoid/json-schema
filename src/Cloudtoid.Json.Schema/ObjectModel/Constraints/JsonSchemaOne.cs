@@ -2,14 +2,14 @@
 {
     using System.Collections.Generic;
 
-    public class JsonSchemaEnum : JsonSchemaAny
+    public class JsonSchemaOne : JsonSchemaConstraints
     {
-        public JsonSchemaEnum(IReadOnlyCollection<JsonSchemaConstant> constraints)
+        public JsonSchemaOne(IReadOnlyCollection<JsonSchemaConstraint> constraints)
             : base(constraints)
         {
         }
 
         protected internal override void Accept(JsonSchemaVisitor visitor)
-            => visitor.VisitEnum(this);
+            => visitor.VisitOne(this);
     }
 }

@@ -5,19 +5,19 @@
     using static Contract;
 
     // the following restrictions can only be applied to json values of type object
-    public class JsonSchemaObjectConstraint : JsonSchemaConstraint
+    public class JsonSchemaObject : JsonSchemaConstraint
     {
-        public JsonSchemaObjectConstraint(
-            IReadOnlyDictionary<string, JsonSchemaElement>? properties,
-            IReadOnlyDictionary<string, JsonSchemaElement>? patternProperties,
-            JsonSchemaElement? additionalProperties,
-            JsonSchemaStringConstraint? propertyNames,
+        public JsonSchemaObject(
+            IReadOnlyDictionary<string, JsonSchemaChildElement>? properties,
+            IReadOnlyDictionary<string, JsonSchemaChildElement>? patternProperties,
+            JsonSchemaChildElement? additionalProperties,
+            JsonSchemaString? propertyNames,
             ISet<string>? requiredProperties,
             int? minProperties,
             int? maxProperties)
         {
-            Properties = properties ?? ImmutableDictionary<string, JsonSchemaElement>.Empty;
-            PatternProperties = patternProperties ?? ImmutableDictionary<string, JsonSchemaElement>.Empty;
+            Properties = properties ?? ImmutableDictionary<string, JsonSchemaChildElement>.Empty;
+            PatternProperties = patternProperties ?? ImmutableDictionary<string, JsonSchemaChildElement>.Empty;
             AdditionalProperties = additionalProperties;
             PropertyNames = propertyNames;
             RequiredProperties = requiredProperties ?? ImmutableHashSet<string>.Empty;
@@ -31,14 +31,14 @@
         /// validates against the corresponding schema. The value of this keyword must be an object, where properties must contain valid
         /// json schemas (objects or booleans). Only the property names that are present in both the object and the keyword value are checked.
         /// </summary>
-        public IReadOnlyDictionary<string, JsonSchemaElement> Properties { get; }
+        public virtual IReadOnlyDictionary<string, JsonSchemaChildElement> Properties { get; }
 
         /// <summary>
         /// Gets the properties of this object.
         /// An object is valid against this constraint if every property where a property name  matches a regular expression from this value,
         /// is also valid against the corresponding schema. Only the property names that are present here and in the object instance are checked.
         /// </summary>
-        public IReadOnlyDictionary<string, JsonSchemaElement> PatternProperties { get; }
+        public virtual IReadOnlyDictionary<string, JsonSchemaChildElement> PatternProperties { get; }
 
         /// <summary>
         /// Gets the additional properties constraints.
@@ -55,32 +55,35 @@
         /// <item>if the value contains a schema element, every property must be valid against that schema element.</item>
         /// </list>
         /// </remarks>
-        public JsonSchemaElement? AdditionalProperties { get; }
+        public virtual JsonSchemaChildElement? AdditionalProperties { get; }
 
         /// <summary>
         /// Gets the constraint applied to all property names of this object.
         /// An object is valid against this constraint if every property name is valid against this value.
         /// </summary>
-        public JsonSchemaStringConstraint? PropertyNames { get; }
+        public virtual JsonSchemaString? PropertyNames { get; }
 
         /// <summary>
         /// Gets the names of the required properties of this object.
         /// An object is valid against this value if it contains all property names specified by the value.
         /// </summary>
-        public ISet<string> RequiredProperties { get; }
+        public virtual ISet<string> RequiredProperties { get; }
 
         /// <summary>
         /// Gets the minimum number of properties.
         /// An object is valid against this value if the number of properties it contains is greater then, or equal to, the value of this keyword.
         /// The value of this property must be a non-negative integer.
         /// </summary>
-        public int? MinProperties { get; }
+        public virtual int? MinProperties { get; }
 
         /// <summary>
         /// Gets the maximum number of properties.
         /// An object is valid against this value if the number of properties it contains is lower then, or equal to, the value of this keyword.
         /// The value of this property must be a non-negative integer.
         /// </summary>
-        public int? MaxProperties { get; }
+        public virtual int? MaxProperties { get; }
+
+        protected internal override void Accept(JsonSchemaVisitor visitor)
+            => visitor.VisitObject(this);
     }
 }

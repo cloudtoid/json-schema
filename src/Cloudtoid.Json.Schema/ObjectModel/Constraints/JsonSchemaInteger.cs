@@ -3,9 +3,9 @@
     using static Contract;
 
     // the following restrictions can only be applied to json values of type integer
-    public class JsonSchemaIntegerConstraint : JsonSchemaConstraint
+    public class JsonSchemaInteger : JsonSchemaConstraint
     {
-        public JsonSchemaIntegerConstraint(
+        public JsonSchemaInteger(
             int? multipleOf,
             JsonSchemaIntegerRange? range)
         {
@@ -14,16 +14,19 @@
         }
 
         /// <summary>
-        /// Gets a multiple of a given number to restrict the valid values.
-        /// This uses the <c>multipleOf</c> keyword and may only be a positive number.
+        /// Gets a multiple of a given integer to restrict the valid values.
+        /// This uses the <c>multipleOf</c> keyword and may only be a positive integer.
         /// </summary>
-        public int? MultipleOf { get; }
+        public virtual int? MultipleOf { get; }
 
         /// <summary>
-        /// Gets the valid range for this number using a combination of the <c>minimum</c>,
+        /// Gets the valid range for this integer using a combination of the <c>minimum</c>,
         /// <c>exclusiveMinimum</c>, <c>maximum</c>, and <c>exclusiveMaximum</c> keywords.
         /// </summary>
-        public JsonSchemaIntegerRange? Range { get; }
+        public virtual JsonSchemaIntegerRange? Range { get; }
+
+        protected internal override void Accept(JsonSchemaVisitor visitor)
+            => visitor.VisitInteger(this);
     }
 
     public sealed class JsonSchemaIntegerRange
@@ -40,9 +43,9 @@
         public JsonSchemaIntegerRangeValue? Maximum { get; }
     }
 
-#pragma warning disable SA1201 // Elements should appear in the correct order
+#pragma warning disable SA1201
     public readonly struct JsonSchemaIntegerRangeValue
-#pragma warning restore SA1201 // Elements should appear in the correct order
+#pragma warning restore SA1201
     {
         public JsonSchemaIntegerRangeValue(int value, bool exclusive = false)
         {
