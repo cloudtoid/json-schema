@@ -1,15 +1,73 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
+    using System.Collections.Generic;
+
     public sealed partial class JsonSchemaWriter
     {
-        protected internal override void VisitObject(JsonSchemaObject constraint) => base.VisitObject(constraint);
+        protected internal override void VisitObject(JsonSchemaObject constraint)
+        {
+            base.VisitObject(constraint);
 
-        protected override void VisitObjectProperty(string name, JsonSchemaChildElement property) => base.VisitObjectProperty(name, property);
+            if (constraint.RequiredProperties.Count > 0)
+                WriteObjectRequiredProperties(constraint.RequiredProperties);
 
-        protected override void VisitObjectPatternProperty(string name, JsonSchemaChildElement property) => base.VisitObjectPatternProperty(name, property);
+            if (constraint.MinProperties != null)
+                writer.WriteNumber(Keys.MinProperties, constraint.MinProperties.Value);
 
-        protected override void VisitObjectAdditionalProperties(JsonSchemaChildElement element) => base.VisitObjectAdditionalProperties(element);
+            if (constraint.MaxProperties != null)
+                writer.WriteNumber(Keys.MaxProperties, constraint.MaxProperties.Value);
+        }
 
-        protected override void VisitObjectPropertyNames(JsonSchemaString constraint) => base.VisitObjectPropertyNames(constraint);
+        protected override void VisitObjectProperties(IReadOnlyDictionary<string, JsonSchemaChildElement> properties)
+        {
+            writer.WriteStartObject(Keys.Properties);
+            base.VisitObjectProperties(properties);
+            writer.WriteEndObject();
+        }
+
+        protected override void VisitObjectProperty(string name, JsonSchemaChildElement property)
+        {
+            writer.WriteStartObject(name);
+            base.VisitObjectProperty(name, property);
+            writer.WriteEndObject();
+        }
+
+        protected override void VisitObjectPatternProperties(IReadOnlyDictionary<string, JsonSchemaChildElement> properties)
+        {
+            writer.WriteStartObject(Keys.PatternProperties);
+            base.VisitObjectPatternProperties(properties);
+            writer.WriteEndObject();
+        }
+
+        protected override void VisitObjectPatternProperty(string name, JsonSchemaChildElement property)
+        {
+            writer.WriteStartObject(name);
+            base.VisitObjectPatternProperty(name, property);
+            writer.WriteEndObject();
+        }
+
+        protected override void VisitObjectAdditionalProperties(JsonSchemaChildElement element)
+        {
+            writer.WriteStartObject(Keys.AdditionalProperties);
+            base.VisitObjectAdditionalProperties(element);
+            writer.WriteEndObject();
+        }
+
+        protected override void VisitObjectPropertyNames(JsonSchemaString constraint)
+        {
+            writer.WriteStartObject(Keys.PropertyNames);
+            base.VisitObjectPropertyNames(constraint);
+            writer.WriteEndObject();
+        }
+
+        private void WriteObjectRequiredProperties(ISet<string> requiredProperties)
+        {
+            writer.WriteStartArray(Keys.Required);
+
+            foreach (var property in requiredProperties)
+                writer.WriteStringValue(property);
+
+            writer.WriteEndArray();
+        }
     }
 }

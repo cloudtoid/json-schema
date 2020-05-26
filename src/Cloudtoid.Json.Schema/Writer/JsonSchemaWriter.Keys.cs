@@ -39,6 +39,7 @@
             internal static readonly JsonEncodedText MinLength = JsonEncodedText.Encode("minLength");
             internal static readonly JsonEncodedText MaxLength = JsonEncodedText.Encode("maxLength");
             internal static readonly JsonEncodedText Pattern = JsonEncodedText.Encode("pattern");
+            internal static readonly JsonEncodedText Format = JsonEncodedText.Encode("format");
             internal static readonly JsonEncodedText ContentEncoding = JsonEncodedText.Encode("contentEncoding");
             internal static readonly JsonEncodedText ContentMediaType = JsonEncodedText.Encode("contentMediaType");
 

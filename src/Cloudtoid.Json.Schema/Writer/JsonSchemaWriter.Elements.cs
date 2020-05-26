@@ -8,7 +8,7 @@
         {
             CheckNotDisposed();
             writer.WriteStartObject();
-            WriteVersion(element.Version);
+            WriteSchemaVersion(element.Version);
             base.VisitSchema(element);
             writer.WriteEndObject();
         }
@@ -38,19 +38,19 @@
                 writer.WriteString(Keys.Comment, metadata.Comment);
 
             if (metadata.Default != null)
-                WriteDefault(metadata.Default);
+                WriteMetadataDefault(metadata.Default);
 
             if (metadata.Examples != null)
-                WriteExamples(metadata.Examples);
+                WriteMetadataExamples(metadata.Examples);
         }
 
-        private void WriteDefault(JsonSchemaConstant @default)
+        private void WriteMetadataDefault(JsonSchemaConstant @default)
         {
             writer.WritePropertyName(Keys.Default);
             WriteConstant(@default);
         }
 
-        private void WriteExamples(IReadOnlyList<JsonSchemaConstant> examples)
+        private void WriteMetadataExamples(IReadOnlyList<JsonSchemaConstant> examples)
         {
             if (examples.Count == 0)
                 return;
@@ -62,7 +62,7 @@
             writer.WriteEndArray();
         }
 
-        private void WriteVersion(JsonSchemaVersion version)
+        private void WriteSchemaVersion(JsonSchemaVersion version)
         {
             var uri = version.GetSchemaUri();
             writer.WriteString(Keys.Schema, uri);
