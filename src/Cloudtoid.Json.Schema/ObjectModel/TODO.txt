@@ -1,0 +1,3 @@
+﻿1) object vs. boolean stuff!
+2) the dependencies property on ObjectConstraint
+ 

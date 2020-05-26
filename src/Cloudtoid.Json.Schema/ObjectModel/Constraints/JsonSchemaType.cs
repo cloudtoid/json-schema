@@ -1,4 +1,4 @@
-﻿namespace Cloudtoid.Json.SchemaNew
+﻿namespace Cloudtoid.Json.Schema
 {
     public enum JsonSchemaType : byte
     {
