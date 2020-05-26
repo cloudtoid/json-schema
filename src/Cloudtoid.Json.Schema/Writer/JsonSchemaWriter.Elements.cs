@@ -1,18 +1,9 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
     using System.Collections.Generic;
-    using System.Text.Json;
 
     public sealed partial class JsonSchemaWriter : JsonSchemaVisitor
     {
-        private static readonly JsonEncodedText MetadataId = JsonEncodedText.Encode("$id");
-        private static readonly JsonEncodedText MetadataTitle = JsonEncodedText.Encode("title");
-        private static readonly JsonEncodedText MetadataDescription = JsonEncodedText.Encode("description");
-        private static readonly JsonEncodedText MetadataDefault = JsonEncodedText.Encode("default");
-        private static readonly JsonEncodedText MetadataExamples = JsonEncodedText.Encode("examples");
-        private static readonly JsonEncodedText MetadataComment = JsonEncodedText.Encode("$comment");
-        private static readonly JsonEncodedText MetadataSchema = JsonEncodedText.Encode("$schema");
-
         protected internal override void VisitSchema(JsonSchema element)
         {
             CheckNotDisposed();
@@ -35,16 +26,16 @@
             base.VisitMetadata(metadata);
 
             if (metadata.Id != null)
-                writer.WriteString(MetadataId, metadata.Id.ToString());
+                writer.WriteString(Keys.Id, metadata.Id.ToString());
 
             if (metadata.Title != null)
-                writer.WriteString(MetadataTitle, metadata.Title);
+                writer.WriteString(Keys.Title, metadata.Title);
 
             if (metadata.Description != null)
-                writer.WriteString(MetadataDescription, metadata.Description);
+                writer.WriteString(Keys.Description, metadata.Description);
 
             if (metadata.Comment != null)
-                writer.WriteString(MetadataComment, metadata.Comment);
+                writer.WriteString(Keys.Comment, metadata.Comment);
 
             if (metadata.Default != null)
                 WriteDefault(metadata.Default);
@@ -55,7 +46,7 @@
 
         private void WriteDefault(JsonSchemaConstant @default)
         {
-            writer.WritePropertyName(MetadataDefault);
+            writer.WritePropertyName(Keys.Default);
             WriteConstant(@default);
         }
 
@@ -64,7 +55,7 @@
             if (examples.Count == 0)
                 return;
 
-            writer.WriteStartArray(MetadataExamples);
+            writer.WriteStartArray(Keys.Examples);
             foreach (var example in examples)
                 WriteConstant(example);
 
@@ -74,7 +65,7 @@
         private void WriteVersion(JsonSchemaVersion version)
         {
             var uri = version.GetSchemaUri();
-            writer.WriteString(MetadataSchema, uri);
+            writer.WriteString(Keys.Schema, uri);
         }
     }
 }
