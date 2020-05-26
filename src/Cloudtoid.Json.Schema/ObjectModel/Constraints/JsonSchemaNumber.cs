@@ -33,7 +33,7 @@
     {
         public JsonSchemaNumberRange(JsonSchemaNumberRangeValue? minimum, JsonSchemaNumberRangeValue? maximum)
         {
-            Contract.Check(minimum.HasValue || maximum.HasValue, "Not both minimum and maximum values can be null!");
+            Check(minimum.HasValue || maximum.HasValue, "Not both minimum and maximum values can be null!");
             Minimum = minimum;
             Maximum = maximum;
         }

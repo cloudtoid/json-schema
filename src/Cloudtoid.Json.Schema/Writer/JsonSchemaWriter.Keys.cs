@@ -21,7 +21,12 @@
             internal static readonly JsonEncodedText Type = JsonEncodedText.Encode("type");
 
             // number keys
+
             internal static readonly JsonEncodedText MultipleOf = JsonEncodedText.Encode("multipleOf");
+            internal static readonly JsonEncodedText Minimum = JsonEncodedText.Encode("minimum");
+            internal static readonly JsonEncodedText Maximum = JsonEncodedText.Encode("maximum");
+            internal static readonly JsonEncodedText ExclusiveMinimum = JsonEncodedText.Encode("exclusiveMinimum");
+            internal static readonly JsonEncodedText ExclusiveMaximum = JsonEncodedText.Encode("exclusiveMaximum");
         }
     }
 }

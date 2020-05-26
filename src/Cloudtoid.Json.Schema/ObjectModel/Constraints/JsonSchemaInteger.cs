@@ -6,10 +6,10 @@
     public class JsonSchemaInteger : JsonSchemaConstraint
     {
         public JsonSchemaInteger(
-            int? multipleOf,
+            ulong? multipleOf,
             JsonSchemaIntegerRange? range)
         {
-            MultipleOf = multipleOf is null ? default : CheckGreaterThan(multipleOf.Value, 0, nameof(multipleOf));
+            MultipleOf = multipleOf is null ? default : CheckGreaterThan(multipleOf.Value, 0ul, nameof(multipleOf));
             Range = range;
         }
 
@@ -17,7 +17,7 @@
         /// Gets a multiple of a given integer to restrict the valid values.
         /// This uses the <c>multipleOf</c> keyword and may only be a positive integer.
         /// </summary>
-        public virtual int? MultipleOf { get; }
+        public virtual ulong? MultipleOf { get; }
 
         /// <summary>
         /// Gets the valid range for this integer using a combination of the <c>minimum</c>,
@@ -33,7 +33,7 @@
     {
         public JsonSchemaIntegerRange(JsonSchemaIntegerRangeValue? minimum, JsonSchemaIntegerRangeValue? maximum)
         {
-            Contract.Check(minimum.HasValue || maximum.HasValue, "Not both minimum and maximum values can be null!");
+            Check(minimum.HasValue || maximum.HasValue, "Not both minimum and maximum values can be null!");
             Minimum = minimum;
             Maximum = maximum;
         }
@@ -47,13 +47,13 @@
     public readonly struct JsonSchemaIntegerRangeValue
 #pragma warning restore SA1201
     {
-        public JsonSchemaIntegerRangeValue(int value, bool exclusive = false)
+        public JsonSchemaIntegerRangeValue(long value, bool exclusive = false)
         {
             Value = value;
             Exclusive = exclusive;
         }
 
-        public int Value { get; }
+        public long Value { get; }
 
         public bool Exclusive { get; }
     }
