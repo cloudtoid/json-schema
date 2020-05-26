@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public sealed partial class JsonSchemaWriter : JsonSchemaVisitor
+    public sealed partial class JsonSchemaWriter
     {
         protected internal override void VisitSchema(JsonSchema element)
         {

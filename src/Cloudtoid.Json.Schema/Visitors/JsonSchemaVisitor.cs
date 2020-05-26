@@ -42,7 +42,7 @@
             // no-op
         }
 
-        protected void VisitNamedConstraints(JsonSchemaNamedConstraints constraints)
+        protected virtual void VisitNamedConstraints(JsonSchemaNamedConstraints constraints)
         {
             // visit self
             VisitConstraint(constraints);
