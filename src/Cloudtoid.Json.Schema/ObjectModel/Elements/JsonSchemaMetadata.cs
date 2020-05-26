@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Text.Json;
 
     public sealed class JsonSchemaMetadata
     {
@@ -11,7 +10,7 @@
             string? title = null,
             string? description = null,
             string? comment = null,
-            JsonElement? @default = null,
+            object? @default = null,
             IReadOnlyCollection<object>? examples = null)
         {
             Id = id;
@@ -30,7 +29,7 @@
 
         public string? Comment { get; }
 
-        public JsonElement? Default { get; }
+        public object? Default { get; }
 
         public IReadOnlyCollection<object>? Examples { get; }
     }

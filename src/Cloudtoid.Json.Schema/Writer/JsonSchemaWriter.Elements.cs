@@ -10,14 +10,14 @@
         private static readonly JsonEncodedText MetadataDescription = JsonEncodedText.Encode("description");
         private static readonly JsonEncodedText MetadataExamples = JsonEncodedText.Encode("examples");
         private static readonly JsonEncodedText MetadataComment = JsonEncodedText.Encode("$comment");
-        private static readonly JsonEncodedText MetadataSchema = JsonEncodedText.Encode("schema");
+        private static readonly JsonEncodedText MetadataSchema = JsonEncodedText.Encode("$schema");
 
         protected internal override void VisitSchema(JsonSchema element)
         {
             var writer = GetSafeWriter();
             writer.WriteStartObject();
-            base.VisitSchema(element);
             WriteVersion(element.Version);
+            base.VisitSchema(element);
             writer.WriteEndObject();
         }
 
@@ -42,10 +42,10 @@
                 writer.WriteString(MetadataTitle, metadata.Title);
 
             if (metadata.Description != null)
-                writer.WriteString(MetadataTitle, metadata.Description);
+                writer.WriteString(MetadataDescription, metadata.Description);
 
             if (metadata.Comment != null)
-                writer.WriteString(MetadataTitle, metadata.Comment);
+                writer.WriteString(MetadataComment, metadata.Comment);
 
             if (metadata.Examples != null)
                 WriteExamples(metadata.Examples);

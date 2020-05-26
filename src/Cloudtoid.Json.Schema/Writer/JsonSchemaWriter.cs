@@ -18,6 +18,11 @@
             writer = new Utf8JsonWriter(stream, options);
         }
 
+        public void Write(JsonSchemaElement element)
+        {
+            Visit(element);
+        }
+
         public void Dispose()
         {
             if (writer is null)
