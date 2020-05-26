@@ -19,6 +19,9 @@
             // type keys
 
             internal static readonly JsonEncodedText Type = JsonEncodedText.Encode("type");
+
+            // number keys
+            internal static readonly JsonEncodedText MultipleOf = JsonEncodedText.Encode("multipleOf");
         }
     }
 }
