@@ -1,6 +1,6 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
-    // the following restrictions can only be applied to json values of type string
+    // the following restrictions can only be applied to Json values of type string
     public class JsonSchemaString : JsonSchemaConstraint
     {
         public JsonSchemaString(

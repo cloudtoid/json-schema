@@ -2,7 +2,7 @@
 {
     using static Contract;
 
-    // the following restrictions can only be applied to json values of type number
+    // the following restrictions can only be applied to Json values of type number
     public class JsonSchemaNumber : JsonSchemaConstraint
     {
         public JsonSchemaNumber(

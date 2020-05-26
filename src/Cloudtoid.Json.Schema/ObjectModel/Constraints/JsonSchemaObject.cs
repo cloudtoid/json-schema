@@ -4,7 +4,7 @@
     using System.Collections.Immutable;
     using static Contract;
 
-    // the following restrictions can only be applied to json values of type object
+    // the following restrictions can only be applied to Json values of type object
     public class JsonSchemaObject : JsonSchemaConstraint
     {
         public JsonSchemaObject(
@@ -29,7 +29,7 @@
         /// Gets the properties of this object.
         /// An object is valid against this value if every property that is present in both the object and the value of this keyword,
         /// validates against the corresponding schema. The value of this keyword must be an object, where properties must contain valid
-        /// json schemas (objects or booleans). Only the property names that are present in both the object and the keyword value are checked.
+        /// Json schemas (objects or booleans). Only the property names that are present in both the object and the keyword value are checked.
         /// </summary>
         public virtual IReadOnlyDictionary<string, JsonSchemaChildElement> Properties { get; }
 
@@ -45,7 +45,7 @@
         /// An object is valid against this constraint if all unchecked properties are valid against the schema defined by this value.
         /// Unchecked properties are the properties not checked by the <see cref="Properties"/> and <see cref="PatternProperties"/>.
         /// If <see cref="Properties"/> is empty and there are no matches against the patterns of <see cref="PatternProperties"/>, then
-        /// it is considered unchecked. The value of this keyword must be a valid json schema element (object or boolean).
+        /// it is considered unchecked. The value of this keyword must be a valid Json schema element (object or boolean).
         /// </summary>
         /// <remarks>
         /// To be more concise, if we have unchecked properties:

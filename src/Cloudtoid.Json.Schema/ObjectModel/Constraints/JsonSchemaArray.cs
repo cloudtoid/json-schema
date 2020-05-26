@@ -2,7 +2,7 @@
 {
     using static Contract;
 
-    // the following restrictions can only be applied to json values of type array
+    // the following restrictions can only be applied to Json values of type array
     public class JsonSchemaArray : JsonSchemaConstraint
     {
         public JsonSchemaArray(
@@ -39,9 +39,9 @@
         public bool? UniqueItems { get; }
 
         /// <summary>
-        /// Gets a json schema element.
+        /// Gets a Json schema element.
         /// An array is valid against this element if at least one item is valid against the schema defined by this value.
-        /// The value of this keyword must be a valid json schema element (object or boolean).
+        /// The value of this keyword must be a valid Json schema element (object or boolean).
         /// </summary>
         public JsonSchemaChildElement? Contains { get; }
 
@@ -49,9 +49,9 @@
         /// Gets the item constraints.
         /// An array is valid against this value if items are valid against the corresponding schemas provided here. This value can be
         /// <list type="bullet">
-        /// <item>a valid json schema element (object or boolean), then every item must be valid against this schema. In this case,
+        /// <item>a valid Json schema element (object or boolean), then every item must be valid against this schema. In this case,
         /// this property will be set to an instance of <see cref="JsonSchemaArraySingleItem"/></item>
-        /// <item>an array of valid json schemas, then each item must be valid against the schema defined at the same position(index).
+        /// <item>an array of valid Json schemas, then each item must be valid against the schema defined at the same position(index).
         /// Items that don’t have a corresponding position (array contains 5 items and this value only has 3) will be considered valid,
         /// unless the additionalItems keyword is present - which will decide the validity. In this case, this property will be set to
         /// an instance of <see cref="JsonSchemaArrayArrayItems"/></item>

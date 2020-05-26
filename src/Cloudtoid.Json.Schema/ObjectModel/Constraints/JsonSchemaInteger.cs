@@ -2,7 +2,7 @@
 {
     using static Contract;
 
-    // the following restrictions can only be applied to json values of type integer
+    // the following restrictions can only be applied to Json values of type integer
     public class JsonSchemaInteger : JsonSchemaConstraint
     {
         public JsonSchemaInteger(
