@@ -5,6 +5,7 @@
     using System.Text.Json;
     using System.Threading;
     using System.Threading.Tasks;
+    using static Contract;
 
     /// <summary>
     /// Provides a high-performance API for forward-only, non-cached writing of UTF-8 encoded Json Schema text.
@@ -13,12 +14,22 @@
     {
         private readonly Utf8JsonWriter writer;
         private readonly JsonSerializerOptions? options;
+        private readonly bool ownsWriter;
         private bool disposed;
 
         public JsonSchemaWriter(Stream stream, JsonSerializerOptions? options = null)
         {
+            CheckValue(stream, nameof(stream));
             writer = new Utf8JsonWriter(stream, GetWriterOptions(options));
             this.options = options;
+            ownsWriter = true;
+        }
+
+        public JsonSchemaWriter(Utf8JsonWriter writer, JsonSerializerOptions? options = null)
+        {
+            this.writer = CheckValue(writer, nameof(writer));
+            this.options = options;
+            ownsWriter = false;
         }
 
         public void Write(JsonSchemaElement element)
@@ -32,7 +43,8 @@
                 return;
 
             disposed = true;
-            writer.Dispose();
+            if (ownsWriter)
+                writer.Dispose();
         }
 
         public async ValueTask DisposeAsync()
@@ -41,7 +53,8 @@
                 return;
 
             disposed = true;
-            await writer.DisposeAsync();
+            if (ownsWriter)
+                await writer.DisposeAsync();
         }
 
         /// <summary>
