@@ -11,7 +11,8 @@
     /// </summary>
     public sealed partial class JsonSchemaWriter : IDisposable, IAsyncDisposable
     {
-        private Utf8JsonWriter? writer;
+        private readonly Utf8JsonWriter writer;
+        private bool disposed;
 
         public JsonSchemaWriter(Stream stream, JsonWriterOptions options = default)
         {
@@ -25,20 +26,20 @@
 
         public void Dispose()
         {
-            if (writer is null)
+            if (disposed)
                 return;
 
+            disposed = true;
             writer.Dispose();
-            writer = null;
         }
 
         public async ValueTask DisposeAsync()
         {
-            if (writer is null)
+            if (disposed)
                 return;
 
+            disposed = true;
             await writer.DisposeAsync();
-            writer = null;
         }
 
         /// <summary>
@@ -48,7 +49,10 @@
         ///   The instance of <see cref="JsonSchemaWriter"/> has been disposed.
         /// </exception>
         public void Flush()
-            => GetSafeWriter().Flush();
+        {
+            CheckNotDisposed();
+            writer.Flush();
+        }
 
         /// <summary>
         /// Asynchronously commits the Json Schema text written so far which makes it visible to the output destination.
@@ -57,9 +61,15 @@
         ///   The instance of <see cref="JsonSchemaWriter"/> has been disposed.
         /// </exception>
         public async Task FlushAsync(CancellationToken cancellationToken = default)
-            => await GetSafeWriter().FlushAsync(cancellationToken);
+        {
+            CheckNotDisposed();
+            await writer.FlushAsync(cancellationToken);
+        }
 
-        private Utf8JsonWriter GetSafeWriter()
-            => writer ?? throw new ObjectDisposedException(nameof(JsonSchemaWriter));
+        private void CheckNotDisposed()
+        {
+            if (disposed)
+                throw new ObjectDisposedException(nameof(JsonSchemaWriter));
+        }
     }
 }

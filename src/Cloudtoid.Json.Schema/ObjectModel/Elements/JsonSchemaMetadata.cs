@@ -10,8 +10,8 @@
             string? title = null,
             string? description = null,
             string? comment = null,
-            object? @default = null,
-            IReadOnlyCollection<object>? examples = null)
+            JsonSchemaConstant? @default = null,
+            IReadOnlyCollection<JsonSchemaConstant>? examples = null)
         {
             Id = id;
             Title = title;
@@ -29,8 +29,8 @@
 
         public string? Comment { get; }
 
-        public object? Default { get; }
+        public JsonSchemaConstant? Default { get; }
 
-        public IReadOnlyCollection<object>? Examples { get; }
+        public IReadOnlyCollection<JsonSchemaConstant>? Examples { get; }
     }
 }

@@ -1,3 +1,4 @@
 ﻿1) object vs. boolean stuff!
 2) the dependencies property on ObjectConstraint
+3) Add Json serializer options for Default, Examples, and Constant values
  
