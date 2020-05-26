@@ -50,7 +50,7 @@
             WriteConstant(@default);
         }
 
-        private void WriteExamples(IReadOnlyCollection<JsonSchemaConstant> examples)
+        private void WriteExamples(IReadOnlyList<JsonSchemaConstant> examples)
         {
             if (examples.Count == 0)
                 return;

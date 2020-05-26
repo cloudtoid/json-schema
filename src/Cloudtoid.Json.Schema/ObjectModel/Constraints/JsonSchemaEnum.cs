@@ -4,7 +4,7 @@
 
     public class JsonSchemaEnum : JsonSchemaAny
     {
-        public JsonSchemaEnum(IReadOnlyCollection<JsonSchemaConstant> constraints)
+        public JsonSchemaEnum(IReadOnlyList<JsonSchemaConstant> constraints)
             : base(constraints)
         {
         }

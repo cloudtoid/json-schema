@@ -1,6 +1,7 @@
 ﻿namespace Cloudtoid.Json.Schema.UnitTests
 {
     using System;
+    using System.Text.Json;
     using FluentAssertions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,7 +12,15 @@
         public void MetadataTests()
         {
             var schema = new JsonSchema(
-                JsonSchemaConstraints.Empty,
+                new JsonSchemaConstraint[]
+                {
+                    new JsonSchemaTypes(JsonSchemaDataType.Number, JsonSchemaDataType.Integer),
+                    new JsonSchemaNumber(
+                        12.5,
+                        new JsonSchemaNumberRange(
+                            new JsonSchemaNumberRangeValue(10.5),
+                            new JsonSchemaNumberRangeValue(15)))
+                },
                 new JsonSchemaMetadata(
                     id: new Uri("http://example.com/number.json#"),
                     title: "Test if it is a number",
@@ -32,7 +41,7 @@
                         new JsonSchemaConstant<int?>(10)
                     }));
 
-            var result = JsonSchemaSerializer.Serialize(schema);
+            var result = JsonSchemaSerializer.Serialize(schema, new JsonSerializerOptions { WriteIndented = true });
 
             result.Should().Be("a");
         }

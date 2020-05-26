@@ -18,7 +18,12 @@
             if (element.Metadata != null)
                 VisitMetadata(element.Metadata);
 
-            Visit(element.Constraints);
+            var constraints = element.Constraints;
+            if (constraints.Count > 0)
+            {
+                foreach (var constraint in constraints)
+                    Visit(constraint);
+            }
         }
 
         protected virtual void VisitMetadata(JsonSchemaMetadata metadata)
@@ -37,7 +42,7 @@
             // no-op
         }
 
-        protected void VisitConstraints(JsonSchemaConstraints constraints)
+        protected void VisitNamedConstraints(JsonSchemaNamedConstraints constraints)
         {
             // visit self
             VisitConstraint(constraints);
@@ -48,13 +53,13 @@
         }
 
         protected internal virtual void VisitOne(JsonSchemaOne constraints)
-            => VisitConstraints(constraints);
+            => VisitNamedConstraints(constraints);
 
         protected internal virtual void VisitAll(JsonSchemaAll constraints)
-            => VisitConstraints(constraints);
+            => VisitNamedConstraints(constraints);
 
         protected internal virtual void VisitAny(JsonSchemaAny constraints)
-            => VisitConstraints(constraints);
+            => VisitNamedConstraints(constraints);
 
         protected internal virtual void VisitEnum(JsonSchemaEnum constraint)
             => VisitAny(constraint);
@@ -85,7 +90,7 @@
         protected internal virtual void VisitConstant(JsonSchemaConstant constraint)
             => VisitConstraint(constraint);
 
-        protected internal virtual void VisitType(JsonSchemaType constraint)
+        protected internal virtual void VisitTypes(JsonSchemaTypes constraint)
             => VisitConstraint(constraint);
 
         protected internal virtual void VisitNumber(JsonSchemaNumber constraint)

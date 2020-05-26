@@ -18,10 +18,22 @@
             TypeNames[(int)JsonSchemaDataType.Boolean] = JsonEncodedText.Encode("boolean");
         }
 
-        protected internal override void VisitType(JsonSchemaType constraint)
+        protected internal override void VisitTypes(JsonSchemaTypes constraint)
         {
-            base.VisitType(constraint);
-            writer.WriteString(Keys.Type, TypeNames[(int)constraint.Type]);
+            base.VisitTypes(constraint);
+            var types = constraint.Types;
+            var len = types.Count;
+            if (len == 1)
+            {
+                writer.WriteString(Keys.Type, TypeNames[(int)types[0]]);
+                return;
+            }
+
+            writer.WriteStartArray(Keys.Type);
+            for (int i = 0; i < len; i++)
+                writer.WriteStringValue(TypeNames[(int)types[i]]);
+
+            writer.WriteEndArray();
         }
     }
 }

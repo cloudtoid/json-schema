@@ -1,12 +1,14 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// This represents all Json Schema elements except for the root element which is <see cref="JsonSchema"/>.
     /// </summary>
     public class JsonSchemaChildElement : JsonSchemaElement
     {
         public JsonSchemaChildElement(
-            JsonSchemaConstraints constraints,
+            IReadOnlyList<JsonSchemaConstraint> constraints,
             JsonSchemaMetadata? metadata)
             : base(constraints, metadata)
         {

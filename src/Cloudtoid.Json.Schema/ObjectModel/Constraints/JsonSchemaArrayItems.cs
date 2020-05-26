@@ -25,14 +25,14 @@
     public class JsonSchemaArrayArrayItems : JsonSchemaArrayItems
     {
         public JsonSchemaArrayArrayItems(
-            IReadOnlyCollection<JsonSchemaChildElement> items,
+            IReadOnlyList<JsonSchemaChildElement> items,
             JsonSchemaChildElement? additionalItems)
         {
             Items = CheckValue(items, nameof(items));
             AdditionalItems = additionalItems;
         }
 
-        public virtual IReadOnlyCollection<JsonSchemaChildElement> Items { get; }
+        public virtual IReadOnlyList<JsonSchemaChildElement> Items { get; }
 
         public virtual JsonSchemaChildElement? AdditionalItems { get; }
 

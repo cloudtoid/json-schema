@@ -1,5 +1,7 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// This is the root element in a Json Schema.
     /// </summary>
@@ -7,7 +9,7 @@
     {
         public JsonSchema(
             JsonSchemaVersion version,
-            JsonSchemaConstraints constraints,
+            IReadOnlyList<JsonSchemaConstraint> constraints,
             JsonSchemaMetadata? metadata)
             : base(constraints, metadata)
         {
@@ -15,7 +17,7 @@
         }
 
         public JsonSchema(
-            JsonSchemaConstraints constraints,
+            IReadOnlyList<JsonSchemaConstraint> constraints,
             JsonSchemaMetadata? metadata)
             : this(JsonSchemaVersionLookup.LatestSupportedVersion, constraints, metadata)
         {

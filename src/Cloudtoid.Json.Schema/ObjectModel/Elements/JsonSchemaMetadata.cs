@@ -11,7 +11,7 @@
             string? description = null,
             string? comment = null,
             JsonSchemaConstant? @default = null,
-            IReadOnlyCollection<JsonSchemaConstant>? examples = null)
+            IReadOnlyList<JsonSchemaConstant>? examples = null)
         {
             Id = id;
             Title = title;
@@ -31,6 +31,6 @@
 
         public JsonSchemaConstant? Default { get; }
 
-        public IReadOnlyCollection<JsonSchemaConstant>? Examples { get; }
+        public IReadOnlyList<JsonSchemaConstant>? Examples { get; }
     }
 }

@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
 
-    public class JsonSchemaAny : JsonSchemaConstraints
+    public class JsonSchemaAny : JsonSchemaNamedConstraints
     {
-        public JsonSchemaAny(IReadOnlyCollection<JsonSchemaConstraint> constraints)
+        public JsonSchemaAny(IReadOnlyList<JsonSchemaConstraint> constraints)
             : base(constraints)
         {
         }
