@@ -12,11 +12,13 @@
     public sealed partial class JsonSchemaWriter : IDisposable, IAsyncDisposable
     {
         private readonly Utf8JsonWriter writer;
+        private readonly JsonSerializerOptions? options;
         private bool disposed;
 
-        public JsonSchemaWriter(Stream stream, JsonWriterOptions options = default)
+        public JsonSchemaWriter(Stream stream, JsonSerializerOptions? options = null)
         {
-            writer = new Utf8JsonWriter(stream, options);
+            writer = new Utf8JsonWriter(stream, GetWriterOptions(options));
+            this.options = options;
         }
 
         public void Write(JsonSchemaElement element)
@@ -70,6 +72,16 @@
         {
             if (disposed)
                 throw new ObjectDisposedException(nameof(JsonSchemaWriter));
+        }
+
+        private static JsonWriterOptions GetWriterOptions(JsonSerializerOptions? options)
+        {
+            return new JsonWriterOptions
+            {
+                Indented = options?.WriteIndented ?? false,
+                Encoder = options?.Encoder ?? null,
+                SkipValidation = true
+            };
         }
     }
 }
