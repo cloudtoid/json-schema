@@ -17,9 +17,9 @@
                     new JsonSchemaTypes(JsonSchemaDataType.Number, JsonSchemaDataType.Integer),
                     new JsonSchemaNumber(
                         12.5,
-                        new JsonSchemaNumberRange(
-                            new JsonSchemaNumberRangeValue(10.5),
-                            new JsonSchemaNumberRangeValue(15)))
+                        minimum: 10.5,
+                        isMinimumExlusive: true,
+                        maximum: 12.5)
                 },
                 new JsonSchemaMetadata(
                     id: new Uri("http://example.com/number.json#"),

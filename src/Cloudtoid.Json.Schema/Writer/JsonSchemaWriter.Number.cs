@@ -9,23 +9,11 @@
             if (constraint.MultipleOf != null)
                 writer.WriteNumber(Keys.MultipleOf, constraint.MultipleOf.Value);
 
-            var range = constraint.Range;
-            if (range is null)
-                return;
+            if (constraint.Minimum != null)
+                writer.WriteNumber(constraint.IsMinimumExclusive ? Keys.ExclusiveMinimum : Keys.Minimum, constraint.Minimum.Value);
 
-            var minimum = range.Minimum;
-            if (minimum != null)
-            {
-                var min = minimum.Value;
-                writer.WriteNumber(min.Exclusive ? Keys.ExclusiveMinimum : Keys.Minimum, min.Value);
-            }
-
-            var maximum = range.Maximum;
-            if (maximum != null)
-            {
-                var max = maximum.Value;
-                writer.WriteNumber(max.Exclusive ? Keys.ExclusiveMaximum : Keys.Maximum, max.Value);
-            }
+            if (constraint.Maximum != null)
+                writer.WriteNumber(constraint.IsMaximumExclusive ? Keys.ExclusiveMaximum : Keys.Maximum, constraint.Maximum.Value);
         }
 
         protected internal override void VisitInteger(JsonSchemaInteger constraint)
@@ -35,23 +23,11 @@
             if (constraint.MultipleOf != null)
                 writer.WriteNumber(Keys.MultipleOf, constraint.MultipleOf.Value);
 
-            var range = constraint.Range;
-            if (range is null)
-                return;
+            if (constraint.Minimum != null)
+                writer.WriteNumber(constraint.IsMinimumExclusive ? Keys.ExclusiveMinimum : Keys.Minimum, constraint.Minimum.Value);
 
-            var minimum = range.Minimum;
-            if (minimum != null)
-            {
-                var min = minimum.Value;
-                writer.WriteNumber(min.Exclusive ? Keys.ExclusiveMinimum : Keys.Minimum, min.Value);
-            }
-
-            var maximum = range.Maximum;
-            if (maximum != null)
-            {
-                var max = maximum.Value;
-                writer.WriteNumber(max.Exclusive ? Keys.ExclusiveMaximum : Keys.Maximum, max.Value);
-            }
+            if (constraint.Maximum != null)
+                writer.WriteNumber(constraint.IsMaximumExclusive ? Keys.ExclusiveMaximum : Keys.Maximum, constraint.Maximum.Value);
         }
     }
 }

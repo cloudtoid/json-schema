@@ -6,17 +6,19 @@
     {
         public JsonSchemaConditional(
             JsonSchemaConstraint @if,
-            JsonSchemaConstraint then,
+            JsonSchemaConstraint? then,
             JsonSchemaConstraint? @else)
         {
             If = CheckValue(@if, nameof(@if));
-            Then = CheckValue(then, nameof(then));
+
+            Check(then != null || @else != null, "Either 'then' or 'else' clause should be set.");
+            Then = then;
             Else = @else;
         }
 
         public JsonSchemaConstraint If { get; }
 
-        public JsonSchemaConstraint Then { get; }
+        public JsonSchemaConstraint? Then { get; }
 
         public JsonSchemaConstraint? Else { get; }
 

@@ -30,7 +30,7 @@
             }
 
             writer.WriteStartArray(Keys.Type);
-            
+
             for (int i = 0; i < len; i++)
                 writer.WriteStringValue(TypeNames[(int)types[i]]);
 

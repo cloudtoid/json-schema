@@ -10,7 +10,9 @@
             // visit children
 
             VisitConditionalIfClause(constraint.If);
-            VisitConditionalThenClause(constraint.Then);
+
+            if (constraint.Then != null)
+                VisitConditionalThenClause(constraint.Then);
 
             if (constraint.Else != null)
                 VisitConditionalElseClause(constraint.Else);
