@@ -5,10 +5,9 @@ Go through the spec here: https://json-schema.org/draft/2019-09/json-schema-vali
 3) Implement unevaluatedItems on Array
 4) Implement unevaluatedProperties on Object
 5) what is dependentRequired? https://github.com/json-schema-org/json-schema-spec/blob/master/meta/validation.json
-6) What is contentSchema? https://github.com/json-schema-org/json-schema-spec/blob/master/meta/content.json
 7) What is dependentSchemas? https://github.com/json-schema-org/json-schema-spec/blob/master/meta/applicator.json 
 8) It says that the $comment can be everywhere!
 9) Add support for $vocabulary and meta-schemas. See the core spec.
 10) How to determine the base URI: https://json-schema.org/draft/2019-09/json-schema-core.html#initial-base
 11) Add support for $ref, $recursiveRef, and $recursiveAnchor
-12) 
+12) Add a check for the string of all dictionaries such as Definitions and Properties.

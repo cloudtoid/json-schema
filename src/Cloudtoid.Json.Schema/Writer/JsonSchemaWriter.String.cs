@@ -4,8 +4,6 @@
     {
         protected internal override void VisitString(JsonSchemaString constraint)
         {
-            base.VisitString(constraint);
-
             if (constraint.MinLength != null)
                 writer.WriteNumber(Keys.MinLength, constraint.MinLength.Value);
 
@@ -21,8 +19,20 @@
             if (constraint.ContentEncoding != null)
                 writer.WriteString(Keys.ContentEncoding, constraint.ContentEncoding);
 
-            if (constraint.ContentMediaType != null)
-                writer.WriteString(Keys.ContentMediaType, constraint.ContentMediaType);
+            base.VisitString(constraint);
+        }
+
+        protected override void VisitStringContentMedia(string contentMediaType, JsonSchemaSubSchema? contentSchema)
+        {
+            writer.WriteString(Keys.ContentMediaType, contentMediaType);
+            base.VisitStringContentMedia(contentMediaType, contentSchema);
+        }
+
+        protected override void VisitStringContentSchema(JsonSchemaSubSchema element)
+        {
+            writer.WriteStartObject(Keys.ContentSchema);
+            base.VisitStringContentSchema(element);
+            writer.WriteEndObject();
         }
     }
 }

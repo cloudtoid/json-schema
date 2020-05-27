@@ -13,21 +13,26 @@
         /// <param name="pattern">The regular expression that the string value should successfully match.</param>
         /// <param name="format">The format string which enforces basic semantic validation on certain kinds of string instances that are commonly used.</param>
         /// <param name="contentEncoding">The encoding that is used to restrict the value of this string instance.</param>
-        /// <param name="contentMediaType">The MIME type of the contents of the string instance, as described in RFC 2046.</param>
+        /// <param name="contentMedia">The Type is the MIME type of the contents of the string instance, as described in RFC 2046; and the Schema defines the structure of the string value after decoding.</param>
         public JsonSchemaString(
             uint? minLength = null,
             uint? maxLength = null,
             string? pattern = null,
             string? format = null,
             string? contentEncoding = null,
-            string? contentMediaType = null)
+            (string Type, JsonSchemaSubSchema? Schema)? contentMedia = null)
         {
             MinLength = minLength;
             MaxLength = maxLength;
             Pattern = pattern;
             Format = format;
             ContentEncoding = contentEncoding;
-            ContentMediaType = contentMediaType;
+
+            if (contentMedia != null)
+            {
+                ContentMediaType = contentMedia.Value.Type;
+                ContentSchema = contentMedia.Value.Schema;
+            }
         }
 
         /// <summary>
@@ -89,6 +94,13 @@
         /// system dependent.
         /// </summary>
         public virtual string? ContentMediaType { get; }
+
+        /// <summary>
+        /// Gets the content schema of this string.
+        /// If <see cref="ContentMediaType"/> is not <see langword="null"/>, this property can contain a schema which describes the structure of the string.
+        /// system dependent.
+        /// </summary>
+        public virtual JsonSchemaSubSchema? ContentSchema { get; }
 
         protected internal override void Accept(JsonSchemaVisitor visitor)
             => visitor.VisitString(this);

@@ -54,6 +54,7 @@
             internal static readonly JsonEncodedText Format = JsonEncodedText.Encode("format");
             internal static readonly JsonEncodedText ContentEncoding = JsonEncodedText.Encode("contentEncoding");
             internal static readonly JsonEncodedText ContentMediaType = JsonEncodedText.Encode("contentMediaType");
+            internal static readonly JsonEncodedText ContentSchema = JsonEncodedText.Encode("contentSchema");
 
             // object keys
 
