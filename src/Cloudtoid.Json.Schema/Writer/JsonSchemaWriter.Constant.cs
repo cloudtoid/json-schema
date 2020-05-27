@@ -6,9 +6,9 @@
     {
         protected internal override void VisitConstant(JsonSchemaConstant constraint)
         {
-            writer.WriteStartArray(Keys.Const);
+            writer.WriteStartObject(Keys.Const);
             base.VisitConstant(constraint);
-            writer.WriteEndArray();
+            writer.WriteEndObject();
         }
 
         private void WriteConstant(JsonSchemaConstant constant)

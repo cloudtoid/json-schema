@@ -56,6 +56,7 @@
                 return;
 
             writer.WriteStartArray(Keys.Examples);
+            
             foreach (var example in examples)
                 WriteConstant(example);
 
