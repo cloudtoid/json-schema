@@ -9,6 +9,11 @@
         {
         }
 
+        public JsonSchemaAny(params JsonSchemaConstraint[] constraints)
+            : base(constraints)
+        {
+        }
+
         protected internal override void Accept(JsonSchemaVisitor visitor)
             => visitor.VisitAny(this);
     }

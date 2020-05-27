@@ -1,22 +1,40 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
+    using System.Collections.Generic;
     using static Contract;
 
     // the following restrictions can only be applied to Json values of type array
     public class JsonSchemaArray : JsonSchemaConstraint
     {
         public JsonSchemaArray(
+            JsonSchemaChildElement? item = null,
+            JsonSchemaChildElement? contains = null,
             int? minsItems = null,
             int? maxItems = null,
-            bool? uniqueItems = null,
-            JsonSchemaChildElement? contains = null,
-            JsonSchemaArrayItems? items = null)
+            bool? uniqueItems = null)
         {
+            if (item != null)
+                Items = new JsonSchemaArraySingleItem(item);
+
+            Contains = contains;
             MinItems = minsItems is null ? default : CheckNonNegative(minsItems.Value, nameof(minsItems));
             MaxItems = maxItems is null ? default : CheckNonNegative(maxItems.Value, nameof(maxItems));
             UniqueItems = uniqueItems;
+        }
+
+        public JsonSchemaArray(
+            IReadOnlyList<JsonSchemaChildElement> items,
+            JsonSchemaChildElement? additionalItems = null,
+            JsonSchemaChildElement? contains = null,
+            int? minsItems = null,
+            int? maxItems = null,
+            bool? uniqueItems = null)
+        {
+            Items = new JsonSchemaArrayArrayItems(items, additionalItems);
             Contains = contains;
-            Items = items;
+            MinItems = minsItems is null ? default : CheckNonNegative(minsItems.Value, nameof(minsItems));
+            MaxItems = maxItems is null ? default : CheckNonNegative(maxItems.Value, nameof(maxItems));
+            UniqueItems = uniqueItems;
         }
 
         /// <summary>
@@ -24,26 +42,26 @@
         /// An array is valid against this value, if the number of items it contains is greater than, or equal to, this value.
         /// This value must be a non-negative integer.
         /// </summary>
-        public int? MinItems { get; }
+        public virtual int? MinItems { get; }
 
         /// <summary>
         /// Gets the maximum number of items in the array.
         /// An array is valid against this value, if the number of items it contains is less than, or equal to, this value.
         /// This value must be a non-negative integer.
         /// </summary>
-        public int? MaxItems { get; }
+        public virtual int? MaxItems { get; }
 
         /// <summary>
         /// Gets the value that indicates all items in this array must be unique.
         /// </summary>
-        public bool? UniqueItems { get; }
+        public virtual bool? UniqueItems { get; }
 
         /// <summary>
         /// Gets a Json schema element.
         /// An array is valid against this element if at least one item is valid against the schema defined by this value.
         /// The value of this keyword must be a valid Json schema element (object or boolean).
         /// </summary>
-        public JsonSchemaChildElement? Contains { get; }
+        public virtual JsonSchemaChildElement? Contains { get; }
 
         /// <summary>
         /// Gets the item constraints.
@@ -61,5 +79,41 @@
 
         protected internal override void Accept(JsonSchemaVisitor visitor)
             => visitor.VisitArray(this);
+    }
+
+    public abstract class JsonSchemaArrayItems
+    {
+        protected internal abstract void Accept(JsonSchemaVisitor visitor);
+    }
+
+    public sealed class JsonSchemaArraySingleItem : JsonSchemaArrayItems
+    {
+        internal JsonSchemaArraySingleItem(JsonSchemaChildElement item)
+        {
+            Item = CheckValue(item, nameof(item));
+        }
+
+        public JsonSchemaChildElement Item { get; }
+
+        protected internal override void Accept(JsonSchemaVisitor visitor)
+            => visitor.VisitArraySingleItem(this);
+    }
+
+    public sealed class JsonSchemaArrayArrayItems : JsonSchemaArrayItems
+    {
+        internal JsonSchemaArrayArrayItems(
+            IReadOnlyList<JsonSchemaChildElement> items,
+            JsonSchemaChildElement? additionalItems = null)
+        {
+            Items = CheckValue(items, nameof(items));
+            AdditionalItems = additionalItems;
+        }
+
+        public IReadOnlyList<JsonSchemaChildElement> Items { get; }
+
+        public JsonSchemaChildElement? AdditionalItems { get; }
+
+        protected internal override void Accept(JsonSchemaVisitor visitor)
+            => visitor.VisitArrayArrayItems(this);
     }
 }
