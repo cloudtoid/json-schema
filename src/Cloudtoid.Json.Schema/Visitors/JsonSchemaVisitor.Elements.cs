@@ -1,5 +1,7 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
+    using System.Collections.Generic;
+
     public abstract partial class JsonSchemaVisitor
     {
         protected virtual void Visit(JsonSchemaElement element)
@@ -16,7 +18,19 @@
                 foreach (var constraint in constraints)
                     Visit(constraint);
             }
+
+            if (element.Definitions.Count > 0)
+                VisitDefinitions(element.Definitions);
         }
+
+        protected virtual void VisitDefinitions(IReadOnlyDictionary<string, JsonSchemaSubSchema> elements)
+        {
+            foreach (var element in elements)
+                VisitDefinition(element.Key, element.Value);
+        }
+
+        protected virtual void VisitDefinition(string name, JsonSchemaSubSchema element)
+            => Visit(element);
 
         protected virtual void VisitMetadata(JsonSchemaMetadata metadata)
         {
@@ -26,7 +40,7 @@
         protected internal virtual void VisitSchema(JsonSchema element)
             => VisitElement(element);
 
-        protected internal virtual void VisitChildElement(JsonSchemaChildElement element)
+        protected internal virtual void VisitChildElement(JsonSchemaSubSchema element)
             => VisitElement(element);
     }
 }

@@ -19,7 +19,7 @@
                 VisitArrayItems(constraint.Items);
         }
 
-        protected virtual void VisitArrayContains(JsonSchemaChildElement constraint)
+        protected virtual void VisitArrayContains(JsonSchemaSubSchema constraint)
             => Visit(constraint);
 
         protected virtual void VisitArrayItems(JsonSchemaArrayItems items)
@@ -37,10 +37,10 @@
                 VisitArrayAdditionalItems(items.AdditionalItems);
         }
 
-        protected internal virtual void VisitArrayArrayItem(JsonSchemaChildElement item)
+        protected internal virtual void VisitArrayArrayItem(JsonSchemaSubSchema item)
             => Visit(item);
 
-        protected virtual void VisitArrayAdditionalItems(JsonSchemaChildElement items)
+        protected virtual void VisitArrayAdditionalItems(JsonSchemaSubSchema items)
             => Visit(items);
     }
 }

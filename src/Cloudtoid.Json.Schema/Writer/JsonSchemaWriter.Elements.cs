@@ -4,6 +4,17 @@
 
     public sealed partial class JsonSchemaWriter
     {
+        protected override void VisitElement(JsonSchemaElement element)
+        {
+            if (element.Id != null)
+                writer.WriteString(Keys.Id, element.Id.ToString());
+
+            if (element.Anchor != null)
+                writer.WriteString(Keys.Anchor, element.Anchor);
+
+            base.VisitElement(element);
+        }
+
         protected internal override void VisitSchema(JsonSchema element)
         {
             writer.WriteStartObject();
@@ -12,18 +23,7 @@
             writer.WriteEndObject();
         }
 
-        protected override void VisitElement(JsonSchemaElement element)
-        {
-            base.VisitElement(element);
-
-            if (element.Id != null)
-                writer.WriteString(Keys.Id, element.Id.ToString());
-
-            if (element.Anchor != null)
-                writer.WriteString(Keys.Anchor, element.Anchor);
-        }
-
-        protected internal override void VisitChildElement(JsonSchemaChildElement element)
+        protected internal override void VisitChildElement(JsonSchemaSubSchema element)
         {
             writer.WriteStartObject();
             base.VisitChildElement(element);
@@ -82,6 +82,20 @@
         {
             var uri = version.GetSchemaUri();
             writer.WriteString(Keys.Schema, uri);
+        }
+
+        protected override void VisitDefinitions(IReadOnlyDictionary<string, JsonSchemaSubSchema> elements)
+        {
+            writer.WriteStartObject(Keys.Defs);
+            base.VisitDefinitions(elements);
+            writer.WriteEndObject();
+        }
+
+        protected override void VisitDefinition(string name, JsonSchemaSubSchema element)
+        {
+            writer.WriteStartObject(name);
+            base.VisitDefinition(name, element);
+            writer.WriteEndObject();
         }
     }
 }

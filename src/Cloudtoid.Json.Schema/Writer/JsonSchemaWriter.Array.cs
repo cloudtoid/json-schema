@@ -22,7 +22,7 @@
                 writer.WriteBoolean(Keys.UnniqueItems, constraint.UniqueItems.Value);
         }
 
-        protected override void VisitArrayContains(JsonSchemaChildElement constraint)
+        protected override void VisitArrayContains(JsonSchemaSubSchema constraint)
         {
             writer.WriteStartObject(Keys.Contains);
             base.VisitArrayContains(constraint);
@@ -43,14 +43,14 @@
             writer.WriteEndArray();
         }
 
-        protected internal override void VisitArrayArrayItem(JsonSchemaChildElement item)
+        protected internal override void VisitArrayArrayItem(JsonSchemaSubSchema item)
         {
             writer.WriteStartObject(Keys.Items);
             base.VisitArrayArrayItem(item);
             writer.WriteEndObject();
         }
 
-        protected override void VisitArrayAdditionalItems(JsonSchemaChildElement additionalItems)
+        protected override void VisitArrayAdditionalItems(JsonSchemaSubSchema additionalItems)
         {
             writer.WriteStartObject(Keys.AdditionalItems);
             base.VisitArrayAdditionalItems(additionalItems);

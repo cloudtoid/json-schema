@@ -8,7 +8,7 @@
     using static Contract;
 
     /// <summary>
-    /// Provides a high-performance API for forward-only, non-cached writing of UTF-8 encoded Json Schema text.
+    /// Provides a high-performance API for forward-only, non-cached writing of UTF-8 encoded JSON Schema text.
     /// </summary>
     public sealed partial class JsonSchemaWriter : JsonSchemaVisitor, IDisposable, IAsyncDisposable
     {
@@ -63,7 +63,7 @@
         }
 
         /// <summary>
-        /// Commits the Json Schema text written so far which makes it visible to the output destination.
+        /// Commits the JSON Schema text written so far which makes it visible to the output destination.
         /// </summary>
         /// <exception cref="ObjectDisposedException">
         ///   The instance of <see cref="JsonSchemaWriter"/> has been disposed.
@@ -76,7 +76,7 @@
         }
 
         /// <summary>
-        /// Asynchronously commits the Json Schema text written so far which makes it visible to the output destination.
+        /// Asynchronously commits the JSON Schema text written so far which makes it visible to the output destination.
         /// </summary>
         /// <exception cref="ObjectDisposedException">
         ///   The instance of <see cref="JsonSchemaWriter"/> has been disposed.

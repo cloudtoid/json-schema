@@ -50,7 +50,7 @@
         /// <summary>
         /// Gets the format string which enforces basic semantic validation on certain kinds of string values that are commonly used.
         /// This allows values to be constrained beyond what the other tools in JSON Schema, including <see cref="Pattern"/> can do.
-        /// As of draft-2019-09 version of the Json Schema Specification, By default, format is no longer an assertion.
+        /// As of draft-2019-09 version of the JSON Schema Specification, By default, format is no longer an assertion.
         /// This has been done because the inconsistent implementation of format as an assertion has been an endless source
         /// of surprising problems for schema authors. The default behavior will now be predictable, if not ideal.
         /// We recommend doing semantic validation in the application layer.
@@ -65,8 +65,8 @@
         /// <item><term>idn-hostname</term>A string is valid against this format if it represents a valid IDN hostname.</item>
         /// <item><term>ipv4</term>A string is valid against this format if it represents a valid IPv4 address.</item>
         /// <item><term>ipv6</term>A string is valid against this format if it represents a valid IPv6 address.</item>
-        /// <item><term>json-pointer</term>A string is valid against this format if it represents a valid (absolute) json pointer.</item>
-        /// <item><term>relative-json-pointer</term>A string is valid against this format if it represents a valid relative json pointer.</item>
+        /// <item><term>json-pointer</term>A string is valid against this format if it represents a valid (absolute) JSON pointer.</item>
+        /// <item><term>relative-json-pointer</term>A string is valid against this format if it represents a valid relative JSON pointer.</item>
         /// <item><term>uri</term>A string is valid against this format if it represents a valid uri.</item>
         /// <item><term>uri-reference</term>A string is valid against this format if it represents a valid uri or uri reference.</item>
         /// <item><term>uri-template</term>A string is valid against this format if it represents a valid uri template or uri-reference.</item>

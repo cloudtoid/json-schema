@@ -18,35 +18,35 @@
                 writer.WriteNumber(Keys.MaxProperties, constraint.MaxProperties.Value);
         }
 
-        protected override void VisitObjectProperties(IReadOnlyDictionary<string, JsonSchemaChildElement> properties)
+        protected override void VisitObjectProperties(IReadOnlyDictionary<string, JsonSchemaSubSchema> properties)
         {
             writer.WriteStartObject(Keys.Properties);
             base.VisitObjectProperties(properties);
             writer.WriteEndObject();
         }
 
-        protected override void VisitObjectProperty(string name, JsonSchemaChildElement property)
+        protected override void VisitObjectProperty(string name, JsonSchemaSubSchema property)
         {
             writer.WriteStartObject(name);
             base.VisitObjectProperty(name, property);
             writer.WriteEndObject();
         }
 
-        protected override void VisitObjectPatternProperties(IReadOnlyDictionary<string, JsonSchemaChildElement> properties)
+        protected override void VisitObjectPatternProperties(IReadOnlyDictionary<string, JsonSchemaSubSchema> properties)
         {
             writer.WriteStartObject(Keys.PatternProperties);
             base.VisitObjectPatternProperties(properties);
             writer.WriteEndObject();
         }
 
-        protected override void VisitObjectPatternProperty(string name, JsonSchemaChildElement property)
+        protected override void VisitObjectPatternProperty(string name, JsonSchemaSubSchema property)
         {
             writer.WriteStartObject(name);
             base.VisitObjectPatternProperty(name, property);
             writer.WriteEndObject();
         }
 
-        protected override void VisitObjectAdditionalProperties(JsonSchemaChildElement element)
+        protected override void VisitObjectAdditionalProperties(JsonSchemaSubSchema element)
         {
             writer.WriteStartObject(Keys.AdditionalProperties);
             base.VisitObjectAdditionalProperties(element);
