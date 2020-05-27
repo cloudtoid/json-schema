@@ -12,6 +12,12 @@
             if (constraint.MaxItems != null)
                 writer.WriteNumber(Keys.MaxItems, constraint.MaxItems.Value);
 
+            if (constraint.MinContains != null)
+                writer.WriteNumber(Keys.MinContains, constraint.MinContains.Value);
+
+            if (constraint.MaxContains != null)
+                writer.WriteNumber(Keys.MaxContains, constraint.MaxContains.Value);
+
             if (constraint.UniqueItems != null)
                 writer.WriteBoolean(Keys.UnniqueItems, constraint.UniqueItems.Value);
         }

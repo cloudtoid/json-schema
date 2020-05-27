@@ -1,3 +1,10 @@
-﻿1) object vs. boolean stuff!
-2) the dependencies property on ObjectConstraint
+﻿Go through https://github.com/json-schema-org/json-schema-spec/tree/master/meta
+Go through the spec here: https://json-schema.org/draft/2019-09/json-schema-validation.html (multiple docs)
+
+1) object vs. boolean stuff!
+3) Implement unevaluatedItems on Array
+4) Implement unevaluatedProperties on Object
+5) what is dependentRequired? https://github.com/json-schema-org/json-schema-spec/blob/master/meta/validation.json
+6) What is contentSchema? https://github.com/json-schema-org/json-schema-spec/blob/master/meta/content.json
+7) What is dependentSchemas? https://github.com/json-schema-org/json-schema-spec/blob/master/meta/applicator.json 
  

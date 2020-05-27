@@ -1,8 +1,19 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
-    // the following restrictions can only be applied to Json values of type string
+    /// <summary>
+    /// Provides the validation rules for string instances.
+    /// </summary>
     public class JsonSchemaString : JsonSchemaConstraint
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JsonSchemaString"/> class.
+        /// </summary>
+        /// <param name="minLength">The minimum length of a valid string instance.</param>
+        /// <param name="maxLength">The maximum length of a valid string instance.</param>
+        /// <param name="pattern">The regular expression that the string value should successfully match.</param>
+        /// <param name="format">The format string which enforces basic semantic validation on certain kinds of string instances that are commonly used.</param>
+        /// <param name="contentEncoding">The encoding that is used to restrict the value of this string instance.</param>
+        /// <param name="contentMediaType">The MIME type of the contents of the string instance, as described in RFC 2046.</param>
         public JsonSchemaString(
             uint? minLength = null,
             uint? maxLength = null,
@@ -39,6 +50,10 @@
         /// <summary>
         /// Gets the format string which enforces basic semantic validation on certain kinds of string values that are commonly used.
         /// This allows values to be constrained beyond what the other tools in JSON Schema, including <see cref="Pattern"/> can do.
+        /// As of draft-2019-09 version of the Json Schema Specification, By default, format is no longer an assertion.
+        /// This has been done because the inconsistent implementation of format as an assertion has been an endless source
+        /// of surprising problems for schema authors. The default behavior will now be predictable, if not ideal.
+        /// We recommend doing semantic validation in the application layer.
         /// <list type="bullet">
         /// <item><term>date</term></item>A string is valid against this format if it represents a date in the following format: <c>YYYY-MM-DD</c>.
         /// <item><term>time</term>A string is valid against this format if it represents a time in the following format: <c>hh:mm:ss.sTZD</c>.</item>
@@ -69,7 +84,7 @@
         public virtual string? ContentEncoding { get; }
 
         /// <summary>
-        /// Gets the <c>contentMediaType</c> keyword specifies the MIME type of the contents of a string, as described in RFC 2046.
+        /// Gets the MIME type of the contents of a string, as described in RFC 2046.
         /// There is a list of MIME types officially registered by the IANA, but the set of types supported will be application and operating
         /// system dependent.
         /// </summary>

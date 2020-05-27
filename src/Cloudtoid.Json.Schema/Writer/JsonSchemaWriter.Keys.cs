@@ -6,15 +6,27 @@
     {
         private static class Keys
         {
-            // metadata keys
+            // core keys
 
             internal static readonly JsonEncodedText Id = JsonEncodedText.Encode("$id");
+            internal static readonly JsonEncodedText Anchor = JsonEncodedText.Encode("$anchor");
+            internal static readonly JsonEncodedText RecursiveAnchor = JsonEncodedText.Encode("$recursiveAnchor");
+            internal static readonly JsonEncodedText Ref = JsonEncodedText.Encode("$ref");
+            internal static readonly JsonEncodedText RecursiveRef = JsonEncodedText.Encode("$recursiveRef");
+            internal static readonly JsonEncodedText Schema = JsonEncodedText.Encode("$schema");
+            internal static readonly JsonEncodedText Vocabulary = JsonEncodedText.Encode("$vocabulary");
+            internal static readonly JsonEncodedText Comment = JsonEncodedText.Encode("$comment");
+            internal static readonly JsonEncodedText Defs = JsonEncodedText.Encode("$defs");
+
+            // metadata keys
+
             internal static readonly JsonEncodedText Title = JsonEncodedText.Encode("title");
             internal static readonly JsonEncodedText Description = JsonEncodedText.Encode("description");
             internal static readonly JsonEncodedText Default = JsonEncodedText.Encode("default");
+            internal static readonly JsonEncodedText Deprecated = JsonEncodedText.Encode("deprecated");
+            internal static readonly JsonEncodedText ReadOnly = JsonEncodedText.Encode("readOnly");
+            internal static readonly JsonEncodedText WriteOnly = JsonEncodedText.Encode("writeOnly");
             internal static readonly JsonEncodedText Examples = JsonEncodedText.Encode("examples");
-            internal static readonly JsonEncodedText Comment = JsonEncodedText.Encode("$comment");
-            internal static readonly JsonEncodedText Schema = JsonEncodedText.Encode("$schema");
 
             // type keys
 
@@ -60,6 +72,8 @@
             internal static readonly JsonEncodedText MaxItems = JsonEncodedText.Encode("maxItems");
             internal static readonly JsonEncodedText UnniqueItems = JsonEncodedText.Encode("unniqueItems");
             internal static readonly JsonEncodedText Contains = JsonEncodedText.Encode("contains");
+            internal static readonly JsonEncodedText MinContains = JsonEncodedText.Encode("minContains");
+            internal static readonly JsonEncodedText MaxContains = JsonEncodedText.Encode("maxContains");
             internal static readonly JsonEncodedText Items = JsonEncodedText.Encode("items");
             internal static readonly JsonEncodedText AdditionalItems = JsonEncodedText.Encode("additionalItems");
 

@@ -1,21 +1,30 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
+    using System;
     using System.Collections.Generic;
-    using static Contract;
+    using static KeywordsContract;
 
     public abstract class JsonSchemaElement
     {
         protected JsonSchemaElement(
-            IReadOnlyList<JsonSchemaConstraint> constraints,
-            JsonSchemaMetadata? metadata)
+            Uri? id,
+            string? anchor,
+            JsonSchemaMetadata? metadata,
+            IReadOnlyList<JsonSchemaConstraint>? constraints)
         {
-            Constraints = CheckValue(constraints, nameof(constraints));
+            Id = id;
+            Anchor = CheckAnchor(anchor, nameof(anchor));
+            Constraints = constraints ?? Array.Empty<JsonSchemaConstraint>();
             Metadata = metadata;
         }
 
-        public virtual IReadOnlyList<JsonSchemaConstraint> Constraints { get; }
+        public virtual Uri? Id { get; }
+
+        public virtual string? Anchor { get; }
 
         public virtual JsonSchemaMetadata? Metadata { get; }
+
+        public virtual IReadOnlyList<JsonSchemaConstraint> Constraints { get; }
 
         protected internal abstract void Accept(JsonSchemaVisitor visitor);
     }

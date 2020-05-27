@@ -12,6 +12,17 @@
             writer.WriteEndObject();
         }
 
+        protected override void VisitElement(JsonSchemaElement element)
+        {
+            base.VisitElement(element);
+
+            if (element.Id != null)
+                writer.WriteString(Keys.Id, element.Id.ToString());
+
+            if (element.Anchor != null)
+                writer.WriteString(Keys.Anchor, element.Anchor);
+        }
+
         protected internal override void VisitChildElement(JsonSchemaChildElement element)
         {
             writer.WriteStartObject();
@@ -23,23 +34,29 @@
         {
             base.VisitMetadata(metadata);
 
-            if (metadata.Id != null)
-                writer.WriteString(Keys.Id, metadata.Id.ToString());
-
             if (metadata.Title != null)
                 writer.WriteString(Keys.Title, metadata.Title);
 
             if (metadata.Description != null)
                 writer.WriteString(Keys.Description, metadata.Description);
 
-            if (metadata.Comment != null)
-                writer.WriteString(Keys.Comment, metadata.Comment);
-
             if (metadata.Default != null)
                 WriteMetadataDefault(metadata.Default);
 
+            if (metadata.Deprecated != null)
+                writer.WriteBoolean(Keys.Deprecated, metadata.Deprecated.Value);
+
+            if (metadata.ReadOnly != null)
+                writer.WriteBoolean(Keys.ReadOnly, metadata.ReadOnly.Value);
+
+            if (metadata.WriteOnly != null)
+                writer.WriteBoolean(Keys.WriteOnly, metadata.WriteOnly.Value);
+
             if (metadata.Examples != null)
                 WriteMetadataExamples(metadata.Examples);
+
+            if (metadata.Comment != null)
+                writer.WriteString(Keys.Comment, metadata.Comment);
         }
 
         private void WriteMetadataDefault(JsonSchemaConstant @default)

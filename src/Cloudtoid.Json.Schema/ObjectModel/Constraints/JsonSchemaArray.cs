@@ -6,62 +6,105 @@
     // the following restrictions can only be applied to Json values of type array
     public class JsonSchemaArray : JsonSchemaConstraint
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JsonSchemaArray"/> class.
+        /// </summary>
+        /// <param name="item">All array elements are validated against this schema element.</param>
+        /// <param name="minsItems">The minimum number of items in the array instance.</param>
+        /// <param name="maxItems">The maximum number of items in the array instance.</param>
+        /// <param name="uniqueItems">If this keyword has boolean value <see langword="false"/>, the instance validates successfully.
+        ///     If it has boolean value <see langword="true"/>, the instance validates successfully if all of its elements are unique.</param>
+        /// <param name="contains">The schema element that should be found in the array instance.</param>
+        /// <param name="minContains">The minimum number of contains matches in the array instance.</param>
+        /// <param name="maxContains">The maximum number of contains matches in the array instance.</param>
         public JsonSchemaArray(
             JsonSchemaChildElement? item = null,
+            uint? minsItems = null,
+            uint? maxItems = null,
+            bool? uniqueItems = null,
             JsonSchemaChildElement? contains = null,
-            int? minsItems = null,
-            int? maxItems = null,
-            bool? uniqueItems = null)
+            uint? minContains = null,
+            uint? maxContains = null)
         {
             if (item != null)
                 Items = new JsonSchemaArraySingleItem(item);
 
-            Contains = contains;
-            MinItems = minsItems is null ? default : CheckNonNegative(minsItems.Value, nameof(minsItems));
-            MaxItems = maxItems is null ? default : CheckNonNegative(maxItems.Value, nameof(maxItems));
+            MinItems = minsItems;
+            MaxItems = maxItems;
             UniqueItems = uniqueItems;
+            Contains = contains;
+            MinContains = minContains;
+            MaxContains = maxContains;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JsonSchemaArray"/> class.
+        /// </summary>
+        /// <param name="items">Each element of the array instance validates against the schema at the same position, if any.</param>
+        /// <param name="additionalItems">Each element of the array past the length of <paramref name="items"/> is validated against this schema element.</param>
+        /// <param name="minsItems">The minimum number of items in the array instance.</param>
+        /// <param name="maxItems">The maximum number of items in the array instance.</param>
+        /// <param name="uniqueItems">If this keyword has boolean value <see langword="false"/>, the instance validates successfully.
+        ///     If it has boolean value <see langword="true"/>, the instance validates successfully if all of its elements are unique.</param>
+        /// <param name="contains">The schema element that should be found in the array instance.</param>
+        /// <param name="minContains">The minimum number of contains matches in the array instance.</param>
+        /// <param name="maxContains">The maximum number of contains matches in the array instance.</param>
         public JsonSchemaArray(
             IReadOnlyList<JsonSchemaChildElement> items,
             JsonSchemaChildElement? additionalItems = null,
+            uint? minsItems = null,
+            uint? maxItems = null,
+            bool? uniqueItems = null,
             JsonSchemaChildElement? contains = null,
-            int? minsItems = null,
-            int? maxItems = null,
-            bool? uniqueItems = null)
+            uint? minContains = null,
+            uint? maxContains = null)
         {
             Items = new JsonSchemaArrayArrayItems(items, additionalItems);
-            Contains = contains;
-            MinItems = minsItems is null ? default : CheckNonNegative(minsItems.Value, nameof(minsItems));
-            MaxItems = maxItems is null ? default : CheckNonNegative(maxItems.Value, nameof(maxItems));
+            MinItems = minsItems;
+            MaxItems = maxItems;
             UniqueItems = uniqueItems;
+            Contains = contains;
+            MinContains = minContains;
+            MaxContains = maxContains;
         }
 
         /// <summary>
-        /// Gets the minimum number of items in the array.
+        /// Gets the minimum number of items in the array instance.
         /// An array is valid against this value, if the number of items it contains is greater than, or equal to, this value.
         /// This value must be a non-negative integer.
         /// </summary>
-        public virtual int? MinItems { get; }
+        public virtual uint? MinItems { get; }
 
         /// <summary>
-        /// Gets the maximum number of items in the array.
+        /// Gets the maximum number of items in the array instance.
         /// An array is valid against this value, if the number of items it contains is less than, or equal to, this value.
         /// This value must be a non-negative integer.
         /// </summary>
-        public virtual int? MaxItems { get; }
+        public virtual uint? MaxItems { get; }
 
         /// <summary>
-        /// Gets the value that indicates all items in this array must be unique.
+        /// Gets the value that indicates if all items in this array must be unique.
         /// </summary>
         public virtual bool? UniqueItems { get; }
 
         /// <summary>
-        /// Gets a Json schema element.
+        /// Gets a Json schema element that should be found in the array instance.
         /// An array is valid against this element if at least one item is valid against the schema defined by this value.
         /// The value of this keyword must be a valid Json schema element (object or boolean).
         /// </summary>
         public virtual JsonSchemaChildElement? Contains { get; }
+
+        /// <summary>
+        /// Gets the minimum number of contains matches in the array instance.
+        /// This value must be a non-negative integer.
+        /// </summary>
+        public virtual uint? MinContains { get; }
+
+        /// <summary>
+        /// Gets the maximum number of contains matches in the array instance.
+        /// This value must be a non-negative integer.
+        /// </summary>
+        public virtual uint? MaxContains { get; }
 
         /// <summary>
         /// Gets the item constraints.

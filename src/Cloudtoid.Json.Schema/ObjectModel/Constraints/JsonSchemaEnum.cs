@@ -4,6 +4,10 @@
     using System.Collections.Generic;
     using static Contract;
 
+    /// <summary>
+    /// Provides enum style validation.
+    /// An instance validates successfully if its value is equal to one of the elements .
+    /// </summary>
     public class JsonSchemaEnum : JsonSchemaConstraint, IReadOnlyList<JsonSchemaConstant>
     {
         private readonly IReadOnlyList<JsonSchemaConstant> values;
@@ -11,6 +15,11 @@
         public JsonSchemaEnum(IReadOnlyList<JsonSchemaConstant> values)
         {
             this.values = CheckValue(values, nameof(values));
+        }
+
+        public JsonSchemaEnum(params JsonSchemaConstant[] values)
+            : this((IReadOnlyList<JsonSchemaConstant>)values)
+        {
         }
 
         public virtual int Count

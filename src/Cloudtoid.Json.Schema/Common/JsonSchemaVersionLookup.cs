@@ -21,11 +21,6 @@
             [Draft03] = JsonSchemaVersion.Draft03,
         };
 
-        /// <summary>
-        /// Gets the latest version of the schema spec that is supported by this package.
-        /// </summary>
-        public static JsonSchemaVersion LatestSupportedVersion { get; } = JsonSchemaVersion.Draft201909;
-
         public static bool TryGetVersion(
             string uri,
             [NotNullWhen(true)] out JsonSchemaVersion? version)

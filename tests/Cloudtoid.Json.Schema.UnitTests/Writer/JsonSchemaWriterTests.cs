@@ -12,17 +12,17 @@
         public void MetadataTests()
         {
             var schema = new JsonSchema(
-                new JsonSchemaConstraint[]
+                id: new Uri("http://example.com/number.json#"),
+                constraints: new JsonSchemaConstraint[]
                 {
                     new JsonSchemaTypes(JsonSchemaDataType.Number, JsonSchemaDataType.Integer),
-                    new JsonSchemaNumber(
+                    new JsonSchemaNumeric(
                         12.5,
                         minimum: 10.5,
                         isMinimumExlusive: true,
                         maximum: 12.5)
                 },
-                new JsonSchemaMetadata(
-                    id: new Uri("http://example.com/number.json#"),
+                metadata: new JsonSchemaMetadata(
                     title: "Test if it is a number",
                     description: "A value is considered number if it is an integer or a float.",
                     comment: "This is used for testing",

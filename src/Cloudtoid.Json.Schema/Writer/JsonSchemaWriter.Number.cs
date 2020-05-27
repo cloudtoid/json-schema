@@ -2,7 +2,7 @@
 {
     public sealed partial class JsonSchemaWriter
     {
-        protected internal override void VisitNumber(JsonSchemaNumber constraint)
+        protected internal override void VisitNumber(JsonSchemaNumeric constraint)
         {
             base.VisitNumber(constraint);
 
