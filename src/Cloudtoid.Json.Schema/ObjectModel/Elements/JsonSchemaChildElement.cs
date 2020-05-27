@@ -9,7 +9,7 @@
     {
         public JsonSchemaChildElement(
             IReadOnlyList<JsonSchemaConstraint> constraints,
-            JsonSchemaMetadata? metadata)
+            JsonSchemaMetadata? metadata = null)
             : base(constraints, metadata)
         {
         }

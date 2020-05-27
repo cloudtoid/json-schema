@@ -32,8 +32,13 @@
             ownsWriter = false;
         }
 
+        /// <summary>
+        /// Writes the <paramref name="element"/> to the provided stream/writer/buffer.
+        /// </summary>
         public void Write(JsonSchemaElement element)
         {
+            CheckNotDisposed();
+
             Visit(element);
         }
 
@@ -66,6 +71,7 @@
         public void Flush()
         {
             CheckNotDisposed();
+
             writer.Flush();
         }
 
@@ -78,6 +84,7 @@
         public async Task FlushAsync(CancellationToken cancellationToken = default)
         {
             CheckNotDisposed();
+
             await writer.FlushAsync(cancellationToken);
         }
 

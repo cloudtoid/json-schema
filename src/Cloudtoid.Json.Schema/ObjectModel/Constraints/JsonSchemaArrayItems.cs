@@ -26,7 +26,7 @@
     {
         public JsonSchemaArrayArrayItems(
             IReadOnlyList<JsonSchemaChildElement> items,
-            JsonSchemaChildElement? additionalItems)
+            JsonSchemaChildElement? additionalItems = null)
         {
             Items = CheckValue(items, nameof(items));
             AdditionalItems = additionalItems;

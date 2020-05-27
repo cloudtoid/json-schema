@@ -8,13 +8,13 @@
     public class JsonSchemaObject : JsonSchemaConstraint
     {
         public JsonSchemaObject(
-            IReadOnlyDictionary<string, JsonSchemaChildElement>? properties,
-            IReadOnlyDictionary<string, JsonSchemaChildElement>? patternProperties,
-            JsonSchemaChildElement? additionalProperties,
-            JsonSchemaString? propertyNames,
-            ISet<string>? requiredProperties,
-            int? minProperties,
-            int? maxProperties)
+            IReadOnlyDictionary<string, JsonSchemaChildElement>? properties = null,
+            IReadOnlyDictionary<string, JsonSchemaChildElement>? patternProperties = null,
+            JsonSchemaChildElement? additionalProperties = null,
+            JsonSchemaString? propertyNames = null,
+            ISet<string>? requiredProperties = null,
+            int? minProperties = null,
+            int? maxProperties = null)
         {
             Properties = properties ?? ImmutableDictionary<string, JsonSchemaChildElement>.Empty;
             PatternProperties = patternProperties ?? ImmutableDictionary<string, JsonSchemaChildElement>.Empty;

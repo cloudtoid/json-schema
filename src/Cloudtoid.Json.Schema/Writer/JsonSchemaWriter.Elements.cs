@@ -6,7 +6,6 @@
     {
         protected internal override void VisitSchema(JsonSchema element)
         {
-            CheckNotDisposed();
             writer.WriteStartObject();
             WriteSchemaVersion(element.Version);
             base.VisitSchema(element);
@@ -15,7 +14,6 @@
 
         protected internal override void VisitChildElement(JsonSchemaChildElement element)
         {
-            CheckNotDisposed();
             writer.WriteStartObject();
             base.VisitChildElement(element);
             writer.WriteEndObject();

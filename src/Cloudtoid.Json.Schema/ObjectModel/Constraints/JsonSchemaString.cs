@@ -4,12 +4,12 @@
     public class JsonSchemaString : JsonSchemaConstraint
     {
         public JsonSchemaString(
-            uint? minLength,
-            uint? maxLength,
-            string? pattern,
-            string? format,
-            string? contentEncoding,
-            string? contentMediaType)
+            uint? minLength = null,
+            uint? maxLength = null,
+            string? pattern = null,
+            string? format = null,
+            string? contentEncoding = null,
+            string? contentMediaType = null)
         {
             MinLength = minLength;
             MaxLength = maxLength;

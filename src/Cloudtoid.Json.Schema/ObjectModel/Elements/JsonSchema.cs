@@ -10,7 +10,7 @@
         public JsonSchema(
             JsonSchemaVersion version,
             IReadOnlyList<JsonSchemaConstraint> constraints,
-            JsonSchemaMetadata? metadata)
+            JsonSchemaMetadata? metadata = null)
             : base(constraints, metadata)
         {
             Version = version;
@@ -18,7 +18,7 @@
 
         public JsonSchema(
             IReadOnlyList<JsonSchemaConstraint> constraints,
-            JsonSchemaMetadata? metadata)
+            JsonSchemaMetadata? metadata = null)
             : this(JsonSchemaVersionLookup.LatestSupportedVersion, constraints, metadata)
         {
         }

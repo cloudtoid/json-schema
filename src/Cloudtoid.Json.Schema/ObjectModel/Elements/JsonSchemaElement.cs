@@ -5,7 +5,7 @@
 
     public abstract class JsonSchemaElement
     {
-        public JsonSchemaElement(
+        protected JsonSchemaElement(
             IReadOnlyList<JsonSchemaConstraint> constraints,
             JsonSchemaMetadata? metadata)
         {

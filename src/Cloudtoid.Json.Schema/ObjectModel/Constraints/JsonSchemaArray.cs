@@ -6,11 +6,11 @@
     public class JsonSchemaArray : JsonSchemaConstraint
     {
         public JsonSchemaArray(
-            int? minsItems,
-            int? maxItems,
-            bool? uniqueItems,
-            JsonSchemaChildElement? contains,
-            JsonSchemaArrayItems? items)
+            int? minsItems = null,
+            int? maxItems = null,
+            bool? uniqueItems = null,
+            JsonSchemaChildElement? contains = null,
+            JsonSchemaArrayItems? items = null)
         {
             MinItems = minsItems is null ? default : CheckNonNegative(minsItems.Value, nameof(minsItems));
             MaxItems = maxItems is null ? default : CheckNonNegative(maxItems.Value, nameof(maxItems));

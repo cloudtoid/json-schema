@@ -44,11 +44,11 @@
         where TValue : struct
     {
         protected JsonSchemaAbstractNumber(
-            TValue? multipleOf = null,
-            TValue? minimum = null,
-            bool isMinimumExlusive = false,
-            TValue? maximum = null,
-            bool isMaximumExclusive = false)
+            TValue? multipleOf,
+            TValue? minimum,
+            bool isMinimumExlusive,
+            TValue? maximum,
+            bool isMaximumExclusive)
         {
             MultipleOf = multipleOf;
             Minimum = minimum;
