@@ -4,6 +4,13 @@
 
     public sealed partial class JsonSchemaWriter
     {
+        protected internal override void VisitConstant(JsonSchemaConstant constraint)
+        {
+            writer.WriteStartArray(Keys.Const);
+            base.VisitConstant(constraint);
+            writer.WriteEndArray();
+        }
+
         private void WriteConstant(JsonSchemaConstant constant)
         {
             if (constant.IsNull)

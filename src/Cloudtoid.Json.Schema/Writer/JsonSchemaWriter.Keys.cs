@@ -62,6 +62,21 @@
             internal static readonly JsonEncodedText Contains = JsonEncodedText.Encode("contains");
             internal static readonly JsonEncodedText Items = JsonEncodedText.Encode("items");
             internal static readonly JsonEncodedText AdditionalItems = JsonEncodedText.Encode("additionalItems");
+
+            // conditional keys
+
+            internal static readonly JsonEncodedText Not = JsonEncodedText.Encode("not");
+            internal static readonly JsonEncodedText If = JsonEncodedText.Encode("if");
+            internal static readonly JsonEncodedText Then = JsonEncodedText.Encode("then");
+            internal static readonly JsonEncodedText Else = JsonEncodedText.Encode("else");
+
+            // enum keys
+
+            internal static readonly JsonEncodedText Enum = JsonEncodedText.Encode("enum");
+
+            // const keys
+
+            internal static readonly JsonEncodedText Const = JsonEncodedText.Encode("const");
         }
     }
 }
