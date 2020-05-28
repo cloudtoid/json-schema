@@ -21,7 +21,7 @@
         }
 
         public JsonSchemaTypes(JsonSchemaDataType type)
-            : this(new ValueList<JsonSchemaDataType>(type))
+            : this(new ReadOnlyValueList<JsonSchemaDataType>(type))
         {
         }
 

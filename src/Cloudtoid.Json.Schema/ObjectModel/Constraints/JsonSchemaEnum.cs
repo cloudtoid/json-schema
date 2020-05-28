@@ -25,7 +25,7 @@
         public JsonSchemaEnum(JsonSchemaConstant value)
         {
             CheckValue(value, nameof(value));
-            values = new ValueList<JsonSchemaConstant>(value);
+            values = new ReadOnlyValueList<JsonSchemaConstant>(value);
         }
 
         public virtual int Count

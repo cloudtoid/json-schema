@@ -1,64 +1,58 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
-    using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
     using static Contract;
 
     public abstract class JsonSchemaNamedConstraints : JsonSchemaConstraint, IList<JsonSchemaConstraint>
     {
-        private IList<JsonSchemaConstraint> constraints;
+        private LazyValueList<JsonSchemaConstraint> constraints;
 
         protected JsonSchemaNamedConstraints(IEnumerable<JsonSchemaConstraint> constraints)
         {
             CheckValue(constraints, nameof(constraints));
-            this.constraints = CheckAllValues(constraints.AsList(), nameof(constraints));
+            this.constraints = new LazyValueList<JsonSchemaConstraint>(constraints);
         }
 
         protected JsonSchemaNamedConstraints(JsonSchemaConstraint constraint)
         {
             CheckValue(constraint, nameof(constraint));
-            constraints = new ValueList<JsonSchemaConstraint>(constraint);
+            constraints = new LazyValueList<JsonSchemaConstraint>(constraint);
         }
 
         protected JsonSchemaNamedConstraints()
         {
-            constraints = Array.Empty<JsonSchemaConstraint>();
         }
 
         public virtual int Count
             => constraints.Count;
 
         public bool IsReadOnly
-            => constraints.IsReadOnly;
+            => false;
 
         public virtual JsonSchemaConstraint this[int index]
         {
             get => constraints[index];
-            set => EnsureNotReadOnly()[index] = CheckValue(value, nameof(value));
+            set => constraints[index] = CheckValue(value, nameof(value));
         }
 
         public void Insert(int index, JsonSchemaConstraint item)
-            => EnsureNotReadOnly().Insert(index, CheckValue(item, nameof(item)));
+            => constraints.Insert(index, CheckValue(item, nameof(item)));
 
         public void Add(JsonSchemaConstraint item)
-            => EnsureNotReadOnly().Add(CheckValue(item, nameof(item)));
+            => constraints.Add(CheckValue(item, nameof(item)));
 
         public void RemoveAt(int index)
-            => EnsureNotReadOnly().RemoveAt(index);
+            => constraints.RemoveAt(index);
 
         public bool Remove(JsonSchemaConstraint item)
-            => constraints.Count != 0 && EnsureNotReadOnly().Remove(item);
+            => constraints.Remove(item);
 
         public int IndexOf(JsonSchemaConstraint item)
             => constraints.IndexOf(item);
 
         public void Clear()
-        {
-            if (constraints.Count > 0)
-                constraints.Clear();
-        }
+            => constraints.Clear();
 
         public bool Contains(JsonSchemaConstraint item)
             => constraints.Contains(item);
@@ -71,13 +65,5 @@
 
         IEnumerator IEnumerable.GetEnumerator()
             => constraints.GetEnumerator();
-
-        private IList<JsonSchemaConstraint> EnsureNotReadOnly()
-        {
-            if (constraints is JsonSchemaConstraint[] || constraints.IsReadOnly)
-                constraints = constraints.ToList();
-
-            return constraints;
-        }
     }
 }
