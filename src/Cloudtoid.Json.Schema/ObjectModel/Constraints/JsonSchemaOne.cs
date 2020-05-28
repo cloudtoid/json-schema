@@ -14,6 +14,11 @@
         {
         }
 
+        public JsonSchemaOne(JsonSchemaConstraint constraint)
+            : base(constraint)
+        {
+        }
+
         protected internal override void Accept(JsonSchemaVisitor visitor)
             => visitor.VisitOne(this);
     }

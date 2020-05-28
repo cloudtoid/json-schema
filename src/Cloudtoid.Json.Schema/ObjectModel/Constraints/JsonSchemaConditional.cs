@@ -17,9 +17,9 @@
 
         public JsonSchemaConstraint If { get; }
 
-        public JsonSchemaConstraint? Then { get; }
+        public JsonSchemaConstraint? Then { get; set; }
 
-        public JsonSchemaConstraint? Else { get; }
+        public JsonSchemaConstraint? Else { get; set; }
 
         protected internal override void Accept(JsonSchemaVisitor visitor)
             => visitor.VisitConditional(this);

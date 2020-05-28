@@ -35,20 +35,25 @@
             Examples = examples;
         }
 
-        public string? Title { get; }
+        public JsonSchemaMetadata()
+            : this(null, null, null, null, null, null, null, null)
+        {
+        }
 
-        public string? Description { get; }
+        public string? Title { get; set; }
 
-        public string? Comment { get; }
+        public string? Description { get; set; }
 
-        public bool? Deprecated { get; }
+        public string? Comment { get; set; }
 
-        public bool? ReadOnly { get; }
+        public bool? Deprecated { get; set; }
 
-        public bool? WriteOnly { get; }
+        public bool? ReadOnly { get; set; }
 
-        public JsonSchemaConstant? Default { get; }
+        public bool? WriteOnly { get; set; }
 
-        public IReadOnlyList<JsonSchemaConstant>? Examples { get; }
+        public JsonSchemaConstant? Default { get; set; }
+
+        public IReadOnlyList<JsonSchemaConstant>? Examples { get; set; }
     }
 }

@@ -1,11 +1,12 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
+    using System;
     using System.Collections.Generic;
     using static Contract;
 
     /// <summary>
-    /// Provides type validation.
-    /// An instance validates if and only if the instance is of any of the types listed here.
+    /// Provides data type validation.
+    /// An instance is valid if and only if the instance is of any of the types listed here.
     /// </summary>
     public class JsonSchemaTypes : JsonSchemaConstraint
     {
@@ -20,11 +21,16 @@
         }
 
         public JsonSchemaTypes(JsonSchemaDataType type)
-            : this(new[] { type })
+            : this(new ValueList<JsonSchemaDataType>(type))
         {
         }
 
-        public virtual IReadOnlyList<JsonSchemaDataType> Types { get; }
+        public JsonSchemaTypes()
+        {
+            Types = Array.Empty<JsonSchemaDataType>();
+        }
+
+        public virtual IReadOnlyList<JsonSchemaDataType> Types { get; set; }
 
         protected internal override void Accept(JsonSchemaVisitor visitor)
             => visitor.VisitTypes(this);

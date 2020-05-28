@@ -18,7 +18,7 @@
                 writer.WriteNumber(Keys.MaxProperties, constraint.MaxProperties.Value);
         }
 
-        protected override void VisitObjectProperties(IReadOnlyDictionary<string, JsonSchemaSubSchema> properties)
+        protected override void VisitObjectProperties(IDictionary<string, JsonSchemaSubSchema> properties)
         {
             writer.WriteStartObject(Keys.Properties);
             base.VisitObjectProperties(properties);
@@ -32,7 +32,7 @@
             writer.WriteEndObject();
         }
 
-        protected override void VisitObjectPatternProperties(IReadOnlyDictionary<string, JsonSchemaSubSchema> properties)
+        protected override void VisitObjectPatternProperties(IDictionary<string, JsonSchemaSubSchema> properties)
         {
             writer.WriteStartObject(Keys.PatternProperties);
             base.VisitObjectPatternProperties(properties);

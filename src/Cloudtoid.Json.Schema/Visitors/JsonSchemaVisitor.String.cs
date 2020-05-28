@@ -8,14 +8,16 @@
             VisitConstraint(constraint);
 
             // visit children
-            if (constraint.ContentMediaType != null)
-                VisitStringContentMedia(constraint.ContentMediaType, constraint.ContentSchema);
+
+            var media = constraint.ContentMedia;
+            if (media != null)
+                VisitStringContentMedia(media.Value);
         }
 
-        protected virtual void VisitStringContentMedia(string contentMediaType, JsonSchemaSubSchema? contentSchema)
+        protected virtual void VisitStringContentMedia(in JsonSchemaContentMedia media)
         {
-            if (contentSchema != null)
-                VisitStringContentSchema(contentSchema);
+            if (media.Schema != null)
+                VisitStringContentSchema(media.Schema);
         }
 
         protected virtual void VisitStringContentSchema(JsonSchemaSubSchema element)

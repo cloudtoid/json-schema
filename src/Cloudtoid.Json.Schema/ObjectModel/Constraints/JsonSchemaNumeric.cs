@@ -26,29 +26,29 @@
         /// Gets a multiple of a given number to restrict the valid values.
         /// This uses the <c>multipleOf</c> keyword and may only be a positive number.
         /// </summary>
-        public virtual TValue? MultipleOf { get; }
+        public virtual TValue? MultipleOf { get; set; }
 
         /// <summary>
         /// Gets the minimum possible value of this number.
         /// Depending on the value of <see cref="IsMinimumExclusive"/>, it is either a 'greater than', or a 'greater than or equal to condition'.
         /// </summary>
-        public virtual TValue? Minimum { get; }
+        public virtual TValue? Minimum { get; set; }
 
         /// <summary>
         /// Gets if the <see cref="Minimum"/> is exclusive.
         /// </summary>
-        public virtual bool IsMinimumExclusive { get; }
+        public virtual bool IsMinimumExclusive { get; set; }
 
         /// <summary>
         /// Gets the maximum possible value of this number.
         /// Depending on the value of <see cref="IsMaximumExclusive"/>, it is either a 'less than', or a 'less than or equal to condition'.
         /// </summary>
-        public virtual TValue? Maximum { get; }
+        public virtual TValue? Maximum { get; set; }
 
         /// <summary>
         /// Gets if the <see cref="Maximum"/> is exclusive.
         /// </summary>
-        public virtual bool IsMaximumExclusive { get; }
+        public virtual bool IsMaximumExclusive { get; set; }
     }
 
     /// <summary>
@@ -72,8 +72,17 @@
             bool isMaximumExclusive = false)
             : base(multipleOf, minimum, isMinimumExlusive, maximum, isMaximumExclusive)
         {
-            if (multipleOf != null)
-                CheckGreaterThan(multipleOf.Value, 0.0, nameof(multipleOf));
+        }
+
+        public JsonSchemaNumeric()
+            : this(null, null, false, null, false)
+        {
+        }
+
+        public override double? MultipleOf
+        {
+            get => base.MultipleOf;
+            set => base.MultipleOf = value is null ? null : (double?)CheckGreaterThan(value.Value, 0.0, nameof(MultipleOf));
         }
 
         protected internal override void Accept(JsonSchemaVisitor visitor)
@@ -101,8 +110,17 @@
             bool isMaximumExclusive = false)
             : base(multipleOf, minimum, isMinimumExlusive, maximum, isMaximumExclusive)
         {
-            if (multipleOf != null)
-                CheckGreaterThan(multipleOf.Value, 0L, nameof(multipleOf));
+        }
+
+        public JsonSchemaInteger()
+            : this(null, null, false, null, false)
+        {
+        }
+
+        public override long? MultipleOf
+        {
+            get => base.MultipleOf;
+            set => base.MultipleOf = value is null ? null : (long?)CheckGreaterThan(value.Value, 0L, nameof(MultipleOf));
         }
 
         protected internal override void Accept(JsonSchemaVisitor visitor)

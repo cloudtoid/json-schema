@@ -22,10 +22,10 @@
             base.VisitString(constraint);
         }
 
-        protected override void VisitStringContentMedia(string contentMediaType, JsonSchemaSubSchema? contentSchema)
+        protected override void VisitStringContentMedia(in JsonSchemaContentMedia media)
         {
-            writer.WriteString(Keys.ContentMediaType, contentMediaType);
-            base.VisitStringContentMedia(contentMediaType, contentSchema);
+            writer.WriteString(Keys.ContentMediaType, media.MediaType);
+            base.VisitStringContentMedia(media);
         }
 
         protected override void VisitStringContentSchema(JsonSchemaSubSchema element)

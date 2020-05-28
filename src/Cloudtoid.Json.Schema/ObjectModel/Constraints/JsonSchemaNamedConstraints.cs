@@ -10,7 +10,14 @@
 
         protected JsonSchemaNamedConstraints(IReadOnlyList<JsonSchemaConstraint> constraints)
         {
+            CheckNonEmpty(constraints, nameof(constraints));
             this.constraints = CheckAllValues(constraints, nameof(constraints));
+        }
+
+        protected JsonSchemaNamedConstraints(JsonSchemaConstraint constraint)
+        {
+            CheckValue(constraint, nameof(constraint));
+            constraints = new ValueList<JsonSchemaConstraint>(constraint);
         }
 
         public virtual int Count

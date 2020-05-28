@@ -13,47 +13,51 @@
         /// <param name="pattern">The regular expression that the string value should successfully match.</param>
         /// <param name="format">The format string which enforces basic semantic validation on certain kinds of string instances that are commonly used.</param>
         /// <param name="contentEncoding">The encoding that is used to restrict the value of this string instance.</param>
-        /// <param name="contentMedia">The Type is the MIME type of the contents of the string instance, as described in RFC 2046; and the Schema defines the structure of the string value after decoding.</param>
+        /// <param name="contentMedia">The MIME type of the contents of the string instance, as described in RFC 2046, and also the schema for the decoded value.</param>
         public JsonSchemaString(
-            uint? minLength = null,
-            uint? maxLength = null,
-            string? pattern = null,
-            string? format = null,
-            string? contentEncoding = null,
-            (string Type, JsonSchemaSubSchema? Schema)? contentMedia = null)
+           uint? minLength = null,
+           uint? maxLength = null,
+           string? pattern = null,
+           string? format = null,
+           string? contentEncoding = null,
+           JsonSchemaContentMedia? contentMedia = null)
         {
             MinLength = minLength;
             MaxLength = maxLength;
             Pattern = pattern;
             Format = format;
             ContentEncoding = contentEncoding;
-
-            if (contentMedia != null)
-            {
-                ContentMediaType = contentMedia.Value.Type;
-                ContentSchema = contentMedia.Value.Schema;
-            }
+            ContentMedia = contentMedia;
         }
 
         /// <summary>
-        /// Gets the minimum length of the string. It uses the <c>minLength</c> keyword and its value must be a non-negative number.
+        /// Initializes a new instance of the <see cref="JsonSchemaString"/> class.
         /// </summary>
-        public virtual uint? MinLength { get; }
+        public JsonSchemaString()
+            : this(null, null, null, null, null, null)
+        {
+        }
 
         /// <summary>
-        /// Gets the maximum length of the string. It uses the <c>maxLength</c> keyword and its value must be a non-negative number.
+        /// Gets or sets the minimum length of the string. It uses the <c>minLength</c> keyword and its value must be a non-negative number.
         /// </summary>
-        public virtual uint? MaxLength { get; }
+        public virtual uint? MinLength { get; set; }
 
         /// <summary>
-        /// Gets the regular expression pattern that is used to restrict the value of this string.
+        /// Gets or sets the maximum length of the string. It uses the <c>maxLength</c> keyword and its value must be a non-negative number.
+        /// </summary>
+        public virtual uint? MaxLength { get; set; }
+
+        /// <summary>
+        /// Gets or sets the regular expression pattern that is used to restrict the value of this string.
         /// The complex syntax of regular expression in JavaScript is supported here, but that complete syntax is not widely supported.
-        /// Therefore, it is recommended to use the subset of that syntax described <a href="https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#regular-expressions">here</a>.
+        /// Therefore, it is recommended to use the subset of that syntax described
+        /// <a href="https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#regular-expressions">here</a>.
         /// </summary>
-        public virtual string? Pattern { get; }
+        public virtual string? Pattern { get; set; }
 
         /// <summary>
-        /// Gets the format string which enforces basic semantic validation on certain kinds of string values that are commonly used.
+        /// Gets or sets the format string which enforces basic semantic validation on certain kinds of string values that are commonly used.
         /// This allows values to be constrained beyond what the other tools in JSON Schema, including <see cref="Pattern"/> can do.
         /// As of draft-2019-09 version of the JSON Schema Specification, By default, format is no longer an assertion.
         /// This has been done because the inconsistent implementation of format as an assertion has been an endless source
@@ -79,28 +83,19 @@
         /// <item><term>iri-reference</term>A string is valid against this format if it represents a valid IRI reference.</item>
         /// </list>
         /// </summary>
-        public virtual string? Format { get; }
+        public virtual string? Format { get; set; }
 
         /// <summary>
         /// Gets the encoding that is used to restrict the value of this string.
         /// The acceptable values are <c>7bit</c>, <c>8bit</c>, <c>binary</c>, <c>quoted-printable</c> and <c>base64</c>. If not specified,
         /// the encoding is the same as the containing JSON document.
         /// </summary>
-        public virtual string? ContentEncoding { get; }
+        public virtual string? ContentEncoding { get; set; }
 
         /// <summary>
-        /// Gets the MIME type of the contents of a string, as described in RFC 2046.
-        /// There is a list of MIME types officially registered by the IANA, but the set of types supported will be application and operating
-        /// system dependent.
+        /// Gets or sets the MIME type of the contents of the string instance, as described in RFC 2046, and also the schema for the decoded value.
         /// </summary>
-        public virtual string? ContentMediaType { get; }
-
-        /// <summary>
-        /// Gets the content schema of this string.
-        /// If <see cref="ContentMediaType"/> is not <see langword="null"/>, this property can contain a schema which describes the structure of the string.
-        /// system dependent.
-        /// </summary>
-        public virtual JsonSchemaSubSchema? ContentSchema { get; }
+        public virtual JsonSchemaContentMedia? ContentMedia { get; set; }
 
         protected internal override void Accept(JsonSchemaVisitor visitor)
             => visitor.VisitString(this);

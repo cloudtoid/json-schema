@@ -69,42 +69,42 @@
         }
 
         /// <summary>
-        /// Gets the minimum number of items in the array instance.
+        /// Gets or sets the minimum number of items in the array instance.
         /// An array is valid against this value, if the number of items it contains is greater than, or equal to, this value.
         /// This value must be a non-negative integer.
         /// </summary>
-        public virtual uint? MinItems { get; }
+        public virtual uint? MinItems { get; set; }
 
         /// <summary>
-        /// Gets the maximum number of items in the array instance.
+        /// Gets or sets the maximum number of items in the array instance.
         /// An array is valid against this value, if the number of items it contains is less than, or equal to, this value.
         /// This value must be a non-negative integer.
         /// </summary>
-        public virtual uint? MaxItems { get; }
+        public virtual uint? MaxItems { get; set; }
 
         /// <summary>
-        /// Gets the value that indicates if all items in this array must be unique.
+        /// Gets or sets the value that indicates if all items in this array must be unique.
         /// </summary>
-        public virtual bool? UniqueItems { get; }
+        public virtual bool? UniqueItems { get; set; }
 
         /// <summary>
-        /// Gets a JSON schema element that should be found in the array instance.
+        /// Gets or sets a JSON schema element that should be found in the array instance.
         /// An array is valid against this element if at least one item is valid against the schema defined by this value.
         /// The value of this keyword must be a valid JSON schema element (object or boolean).
         /// </summary>
-        public virtual JsonSchemaSubSchema? Contains { get; }
+        public virtual JsonSchemaSubSchema? Contains { get; set; }
 
         /// <summary>
-        /// Gets the minimum number of contains matches in the array instance.
+        /// Gets or sets the minimum number of contains matches in the array instance.
         /// This value must be a non-negative integer.
         /// </summary>
-        public virtual uint? MinContains { get; }
+        public virtual uint? MinContains { get; set; }
 
         /// <summary>
-        /// Gets the maximum number of contains matches in the array instance.
+        /// Gets or sets the maximum number of contains matches in the array instance.
         /// This value must be a non-negative integer.
         /// </summary>
-        public virtual uint? MaxContains { get; }
+        public virtual uint? MaxContains { get; set; }
 
         /// <summary>
         /// Gets the item constraints.

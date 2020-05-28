@@ -24,7 +24,7 @@
                 VisitObjectPropertyNames(constraint.PropertyNames);
         }
 
-        protected virtual void VisitObjectProperties(IReadOnlyDictionary<string, JsonSchemaSubSchema> properties)
+        protected virtual void VisitObjectProperties(IDictionary<string, JsonSchemaSubSchema> properties)
         {
             foreach (var property in properties)
                 VisitObjectProperty(property.Key, property.Value);
@@ -33,7 +33,7 @@
         protected virtual void VisitObjectProperty(string name, JsonSchemaSubSchema property)
             => Visit(property);
 
-        protected virtual void VisitObjectPatternProperties(IReadOnlyDictionary<string, JsonSchemaSubSchema> properties)
+        protected virtual void VisitObjectPatternProperties(IDictionary<string, JsonSchemaSubSchema> properties)
         {
             foreach (var property in properties)
                 VisitObjectPatternProperty(property.Key, property.Value);

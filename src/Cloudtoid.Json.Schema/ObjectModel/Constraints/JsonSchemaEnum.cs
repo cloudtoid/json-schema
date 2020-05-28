@@ -22,6 +22,12 @@
         {
         }
 
+        public JsonSchemaEnum(JsonSchemaConstant value)
+        {
+            CheckValue(value, nameof(value));
+            values = new ValueList<JsonSchemaConstant>(value);
+        }
+
         public virtual int Count
             => values.Count;
 

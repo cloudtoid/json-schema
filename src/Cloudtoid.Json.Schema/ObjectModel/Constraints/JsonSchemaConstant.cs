@@ -92,7 +92,7 @@
             Value = value;
         }
 
-        public virtual TValue Value { get; }
+        public virtual TValue Value { get; set; }
 
         protected internal override bool IsNull
             => !typeof(TValue).IsValueType && Value is null;
