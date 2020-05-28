@@ -13,7 +13,8 @@
         /// <param name="minsItems">The minimum number of items in the array instance.</param>
         /// <param name="maxItems">The maximum number of items in the array instance.</param>
         /// <param name="uniqueItems">If this keyword has boolean value <see langword="false"/>, the instance validates successfully.
-        ///     If it has boolean value <see langword="true"/>, the instance validates successfully if all of its elements are unique.</param>
+        ///     If it has boolean value <see langword="true"/>, the instance validates successfully if all of its elements are unique.
+        /// </param>
         /// <param name="contains">The schema element that should be found in the array instance.</param>
         /// <param name="minContains">The minimum number of contains matches in the array instance.</param>
         /// <param name="maxContains">The maximum number of contains matches in the array instance.</param>
@@ -45,7 +46,8 @@
         /// <param name="minsItems">The minimum number of items in the array instance.</param>
         /// <param name="maxItems">The maximum number of items in the array instance.</param>
         /// <param name="uniqueItems">If this keyword has boolean value <see langword="false"/>, the instance validates successfully.
-        ///     If it has boolean value <see langword="true"/>, the instance validates successfully if all of its elements are unique.</param>
+        ///     If it has boolean value <see langword="true"/>, the instance validates successfully if all of its elements are unique.
+        /// </param>
         /// <param name="contains">The schema element that should be found in the array instance.</param>
         /// <param name="minContains">The minimum number of contains matches in the array instance.</param>
         /// <param name="maxContains">The maximum number of contains matches in the array instance.</param>
@@ -66,6 +68,13 @@
             Contains = contains;
             MinContains = minContains;
             MaxContains = maxContains;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JsonSchemaArray"/> class.
+        /// </summary>
+        public JsonSchemaArray()
+        {
         }
 
         /// <summary>
@@ -107,18 +116,47 @@
         public virtual uint? MaxContains { get; set; }
 
         /// <summary>
-        /// Gets the item constraints.
-        /// An array is valid against this value if items are valid against the corresponding schemas provided here. This value can be
+        /// Gets the constraints on array items. Use <see cref="SetItem(JsonSchemaSubSchema?)"/> or
+        /// <see cref="SetItems(IReadOnlyList{JsonSchemaSubSchema}?, JsonSchemaSubSchema?)"/> to change these values.
+        /// An array is valid against this value if items are valid against the corresponding schemas provided here. This value can be:
         /// <list type="bullet">
         /// <item>a valid JSON schema element (object or boolean), then every item must be valid against this schema. In this case,
         /// this property will be set to an instance of <see cref="JsonSchemaArraySingleItem"/></item>
-        /// <item>an array of valid JSON schemas, then each item must be valid against the schema defined at the same position(index).
-        /// Items that don’t have a corresponding position (array contains 5 items and this value only has 3) will be considered valid,
-        /// unless the additionalItems keyword is present - which will decide the validity. In this case, this property will be set to
-        /// an instance of <see cref="JsonSchemaArrayArrayItems"/></item>
+        /// <item>an array of valid JSON schemas, then each item must be valid against the schema defined at the same position (index).
+        /// Items that don’t have a corresponding position (e.g., array contains 5 items and this value only has 3) will be considered
+        /// valid, unless the <see cref="JsonSchemaArrayArrayItems.AdditionalItems"/> is not <see langword="null"/> or empty - which will
+        /// decide the validity. Also, this property will be set to an instance of <see cref="JsonSchemaArrayArrayItems"/></item>
         /// </list>
         /// </summary>
-        public JsonSchemaArrayItems? Items { get; }
+        public JsonSchemaArrayItems? Items { get; private set; }
+
+        /// <summary>
+        /// Sets the constraints on the array items.
+        /// <paramref name="items"/> specifies an array of valid JSON schemas that each array item must be valid against the schema defined
+        ///     at the same position (index). Items that don’t have a corresponding position (e.g., array contains 5 items and this value only
+        ///     has 3) will be considered valid, unless the <paramref name="additionalItems"/> is not <see langword="null"/> or empty - which
+        ///     will decide the validity. In this case, <see cref="Items"/> will be set to an instance of <see cref="JsonSchemaArrayArrayItems"/>
+        /// </summary>
+        public void SetItems(
+            IReadOnlyList<JsonSchemaSubSchema>? items,
+            JsonSchemaSubSchema? additionalItems = null)
+        {
+            Items = items is null
+                ? null
+                : new JsonSchemaArrayArrayItems(items, additionalItems);
+        }
+
+        /// <summary>
+        /// Sets the constraints on the array items.
+        /// </summary>
+        /// <param name="item">All array elements are validated against this schema element, and sets <see cref="Items"/> to an instance of
+        ///     <see cref="JsonSchemaArraySingleItem"/>.</param>
+        public void SetItem(JsonSchemaSubSchema? item)
+        {
+            Items = item is null
+                ? null
+                : new JsonSchemaArraySingleItem(item);
+        }
 
         protected internal override void Accept(JsonSchemaVisitor visitor)
             => visitor.VisitArray(this);

@@ -4,7 +4,7 @@
 
     public class JsonSchemaAny : JsonSchemaNamedConstraints
     {
-        public JsonSchemaAny(IReadOnlyList<JsonSchemaConstraint> constraints)
+        public JsonSchemaAny(IEnumerable<JsonSchemaConstraint> constraints)
             : base(constraints)
         {
         }
@@ -16,6 +16,11 @@
 
         public JsonSchemaAny(JsonSchemaConstraint constraint)
             : base(constraint)
+        {
+        }
+
+        public JsonSchemaAny()
+            : base()
         {
         }
 
