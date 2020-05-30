@@ -8,7 +8,7 @@
         {
             base.VisitObject(constraint);
 
-            if (constraint.RequiredProperties.Count > 0)
+            if (!constraint.RequiredProperties.IsNullOrEmpty())
                 WriteObjectRequiredProperties(constraint.RequiredProperties);
 
             if (constraint.MinProperties != null)

@@ -1,5 +1,6 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
+    using System;
     using System.Collections.Generic;
 
     // the following restrictions can only be applied to JSON values of type object
@@ -14,11 +15,11 @@
             uint? minProperties = null,
             uint? maxProperties = null)
         {
-            Properties = new ValueDictionary<string, JsonSchemaSubSchema>(properties);
-            PatternProperties = new ValueDictionary<string, JsonSchemaSubSchema>(patternProperties);
+            Properties = properties ?? new Dictionary<string, JsonSchemaSubSchema>(StringComparer.Ordinal);
+            PatternProperties = patternProperties;
             AdditionalProperties = additionalProperties;
             PropertyNames = propertyNames;
-            RequiredProperties = new ValueSet<string>(requiredProperties);
+            RequiredProperties = requiredProperties;
             MinProperties = minProperties;
             MaxProperties = maxProperties;
         }
@@ -41,7 +42,7 @@
         /// An object is valid against this constraint if every property where a property name  matches a regular expression from this value,
         /// is also valid against the corresponding schema. Only the property names that are present here and in the object instance are checked.
         /// </summary>
-        public virtual IDictionary<string, JsonSchemaSubSchema> PatternProperties { get; set; }
+        public virtual IDictionary<string, JsonSchemaSubSchema>? PatternProperties { get; set; }
 
         /// <summary>
         /// Gets or sets the additional properties constraints.
@@ -70,19 +71,19 @@
         /// Gets or sets the names of the required properties of this object.
         /// An object is valid against this value if it contains all property names specified by the value.
         /// </summary>
-        public virtual ISet<string> RequiredProperties { get; set; }
+        public virtual ISet<string>? RequiredProperties { get; set; }
 
         /// <summary>
         /// Gets or sets the minimum number of properties.
-        /// An object is valid against this value if the number of properties it contains is greater then, or equal to, the value of this keyword.
-        /// The value of this property must be a non-negative integer.
+        /// An object is valid against this value if the number of properties it contains is greater then,
+        /// or equal to, the value of this keyword. The value of this property must be a non-negative integer.
         /// </summary>
         public virtual uint? MinProperties { get; set; }
 
         /// <summary>
         /// Gets or sets the maximum number of properties.
-        /// An object is valid against this value if the number of properties it contains is lower then, or equal to, the value of this keyword.
-        /// The value of this property must be a non-negative integer.
+        /// An object is valid against this value if the number of properties it contains is lower then, or
+        /// equal to, the value of this keyword. The value of this property must be a non-negative integer.
         /// </summary>
         public virtual uint? MaxProperties { get; set; }
 

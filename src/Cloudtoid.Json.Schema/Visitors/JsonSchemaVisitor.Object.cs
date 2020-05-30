@@ -14,7 +14,7 @@
             if (constraint.Properties.Count > 0)
                 VisitObjectProperties(constraint.Properties);
 
-            if (constraint.PatternProperties.Count > 0)
+            if (!constraint.PatternProperties.IsNullOrEmpty())
                 VisitObjectPatternProperties(constraint.PatternProperties);
 
             if (constraint.AdditionalProperties != null)

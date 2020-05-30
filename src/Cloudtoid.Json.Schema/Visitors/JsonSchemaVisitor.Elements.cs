@@ -20,7 +20,7 @@
             }
 
             if (!element.Definitions.IsNullOrEmpty())
-                VisitDefinitions(element.Definitions!);
+                VisitDefinitions(element.Definitions);
         }
 
         protected virtual void VisitDefinitions(IDictionary<string, JsonSchemaSubSchema> elements)
