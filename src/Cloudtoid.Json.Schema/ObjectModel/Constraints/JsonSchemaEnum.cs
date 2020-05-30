@@ -6,7 +6,7 @@
 
     /// <summary>
     /// Provides enum style validation.
-    /// An instance validates successfully if its value is equal to one of the elements .
+    /// A JSON validates successfully if it is equal to one of the enum values .
     /// </summary>
     public class JsonSchemaEnum : JsonSchemaConstraint, IReadOnlyList<JsonSchemaConstant>
     {

@@ -4,45 +4,28 @@
     using System.Collections.Generic;
 
     /// <summary>
-    /// This represents all JSON Schema elements except for the root element which is <see cref="JsonSchema"/>.
+    /// This represents all JSON Schema resources except for the root schema resource which is <see cref="JsonSchema"/>.
     /// </summary>
-    public class JsonSchemaSubSchema : JsonSchemaElement
+    public class JsonSchemaSubSchema : JsonSchemaResource
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchemaSubSchema"/> class.
         /// </summary>
-        /// <param name="id">It identifies a schema resource with its canonical URI.</param>
-        /// <param name="anchor">When writing schema documents with the intention to provide re-usable schemas,
-        ///     it may be preferable to use a plain name fragment that is not tied to any particular structural location.
-        ///     This allows a subschema to be relocated without requiring JSON Pointer references to be updated.</param>
-        /// <param name="metadata">The metadata information of this element.</param>
-        /// <param name="constraints">The set of constraints applied to this element.</param>
-        /// <param name="definitions">The validations that can be reused later using JsonSchemaReference.</param>
+        /// <inheritdoc cref="JsonSchemaResource(Uri?, string?, IEnumerable{JsonSchemaConstraint}?, string?, string?, string?, bool?, bool?, bool?, JsonSchemaConstant?, IEnumerable{JsonSchemaConstant}?, IDictionary{string, JsonSchemaSubSchema}?)"/>
         public JsonSchemaSubSchema(
             Uri? id = null,
             string? anchor = null,
-            JsonSchemaMetadata? metadata = null,
-            IList<JsonSchemaConstraint>? constraints = null,
+            IEnumerable<JsonSchemaConstraint>? constraints = null,
+            string? title = null,
+            string? description = null,
+            string? comment = null,
+            bool? deprecated = null,
+            bool? readOnly = null,
+            bool? writeOnly = null,
+            JsonSchemaConstant? @default = null,
+            IEnumerable<JsonSchemaConstant>? examples = null,
             IDictionary<string, JsonSchemaSubSchema>? definitions = null)
-            : base(id, anchor, metadata, constraints, definitions)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JsonSchemaSubSchema"/> class.
-        /// </summary>
-        /// <param name="id">It identifies a schema resource with its canonical URI.</param>
-        /// <param name="anchor">When writing schema documents with the intention to provide re-usable schemas,
-        ///     it may be preferable to use a plain name fragment that is not tied to any particular structural location.
-        ///     This allows a subschema to be relocated without requiring JSON Pointer references to be updated.</param>
-        /// <param name="metadata">The metadata information of this element.</param>
-        /// <param name="constraints">The set of constraints applied to this element.</param>
-        public JsonSchemaSubSchema(
-            Uri? id = null,
-            string? anchor = null,
-            JsonSchemaMetadata? metadata = null,
-            params JsonSchemaConstraint[] constraints)
-            : this(id, anchor, metadata, constraints, null)
+            : base(id, anchor, constraints, title, description, comment, deprecated, readOnly, writeOnly, @default, examples, definitions)
         {
         }
 
@@ -55,6 +38,6 @@
         }
 
         protected internal override void Accept(JsonSchemaVisitor visitor)
-            => visitor.VisitChildElement(this);
+            => visitor.VisitSubschema(this);
     }
 }

@@ -33,13 +33,13 @@
         }
 
         /// <summary>
-        /// Writes the <paramref name="element"/> to the provided stream/writer/buffer.
+        /// Writes the <paramref name="resource"/> to the provided stream/writer/buffer.
         /// </summary>
-        public void Write(JsonSchemaElement element)
+        public void Write(JsonSchemaResource resource)
         {
             CheckNotDisposed();
 
-            Visit(element);
+            Visit(resource);
         }
 
         public void Dispose()

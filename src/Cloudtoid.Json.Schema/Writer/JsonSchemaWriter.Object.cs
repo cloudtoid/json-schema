@@ -46,10 +46,10 @@
             writer.WriteEndObject();
         }
 
-        protected override void VisitObjectAdditionalProperties(JsonSchemaSubSchema element)
+        protected override void VisitObjectAdditionalProperties(JsonSchemaSubSchema resource)
         {
             writer.WriteStartObject(Keys.AdditionalProperties);
-            base.VisitObjectAdditionalProperties(element);
+            base.VisitObjectAdditionalProperties(resource);
             writer.WriteEndObject();
         }
 

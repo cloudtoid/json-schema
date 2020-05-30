@@ -42,8 +42,8 @@
         protected virtual void VisitObjectPatternProperty(string name, JsonSchemaSubSchema property)
             => Visit(property);
 
-        protected virtual void VisitObjectAdditionalProperties(JsonSchemaSubSchema element)
-            => Visit(element);
+        protected virtual void VisitObjectAdditionalProperties(JsonSchemaSubSchema resource)
+            => Visit(resource);
 
         protected virtual void VisitObjectPropertyNames(JsonSchemaString constraint)
             => Visit(constraint);

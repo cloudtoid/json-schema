@@ -4,68 +4,63 @@
 
     public sealed partial class JsonSchemaWriter
     {
-        protected override void VisitElement(JsonSchemaElement element)
+        protected override void VisitResource(JsonSchemaResource resource)
         {
-            if (element.Id != null)
-                writer.WriteString(Keys.Id, element.Id.ToString());
+            if (resource.Id != null)
+                writer.WriteString(Keys.Id, resource.Id.ToString());
 
-            if (element.Anchor != null)
-                writer.WriteString(Keys.Anchor, element.Anchor);
+            if (resource.Anchor != null)
+                writer.WriteString(Keys.Anchor, resource.Anchor);
 
-            base.VisitElement(element);
+            if (resource.Title != null)
+                writer.WriteString(Keys.Title, resource.Title);
+
+            if (resource.Description != null)
+                writer.WriteString(Keys.Description, resource.Description);
+
+            if (resource.Default != null)
+                WriteDefault(resource.Default);
+
+            if (resource.Deprecated != null)
+                writer.WriteBoolean(Keys.Deprecated, resource.Deprecated.Value);
+
+            if (resource.ReadOnly != null)
+                writer.WriteBoolean(Keys.ReadOnly, resource.ReadOnly.Value);
+
+            if (resource.WriteOnly != null)
+                writer.WriteBoolean(Keys.WriteOnly, resource.WriteOnly.Value);
+
+            if (resource.Examples != null)
+                WriteExamples(resource.Examples);
+
+            if (resource.Comment != null)
+                writer.WriteString(Keys.Comment, resource.Comment);
+
+            base.VisitResource(resource);
         }
 
-        protected internal override void VisitSchema(JsonSchema element)
+        protected internal override void VisitSchema(JsonSchema resource)
         {
             writer.WriteStartObject();
-            WriteSchemaVersion(element.Version);
-            base.VisitSchema(element);
+            WriteSchemaVersion(resource.Version);
+            base.VisitSchema(resource);
             writer.WriteEndObject();
         }
 
-        protected internal override void VisitChildElement(JsonSchemaSubSchema element)
+        protected internal override void VisitSubschema(JsonSchemaSubSchema resource)
         {
             writer.WriteStartObject();
-            base.VisitChildElement(element);
+            base.VisitSubschema(resource);
             writer.WriteEndObject();
         }
 
-        protected override void VisitMetadata(JsonSchemaMetadata metadata)
-        {
-            base.VisitMetadata(metadata);
-
-            if (metadata.Title != null)
-                writer.WriteString(Keys.Title, metadata.Title);
-
-            if (metadata.Description != null)
-                writer.WriteString(Keys.Description, metadata.Description);
-
-            if (metadata.Default != null)
-                WriteMetadataDefault(metadata.Default);
-
-            if (metadata.Deprecated != null)
-                writer.WriteBoolean(Keys.Deprecated, metadata.Deprecated.Value);
-
-            if (metadata.ReadOnly != null)
-                writer.WriteBoolean(Keys.ReadOnly, metadata.ReadOnly.Value);
-
-            if (metadata.WriteOnly != null)
-                writer.WriteBoolean(Keys.WriteOnly, metadata.WriteOnly.Value);
-
-            if (metadata.Examples != null)
-                WriteMetadataExamples(metadata.Examples);
-
-            if (metadata.Comment != null)
-                writer.WriteString(Keys.Comment, metadata.Comment);
-        }
-
-        private void WriteMetadataDefault(JsonSchemaConstant @default)
+        private void WriteDefault(JsonSchemaConstant @default)
         {
             writer.WritePropertyName(Keys.Default);
             WriteConstant(@default);
         }
 
-        private void WriteMetadataExamples(IReadOnlyList<JsonSchemaConstant> examples)
+        private void WriteExamples(IList<JsonSchemaConstant> examples)
         {
             if (examples.Count == 0)
                 return;
@@ -84,17 +79,17 @@
             writer.WriteString(Keys.Schema, uri);
         }
 
-        protected override void VisitDefinitions(IDictionary<string, JsonSchemaSubSchema> elements)
+        protected override void VisitDefinitions(IDictionary<string, JsonSchemaSubSchema> resources)
         {
             writer.WriteStartObject(Keys.Defs);
-            base.VisitDefinitions(elements);
+            base.VisitDefinitions(resources);
             writer.WriteEndObject();
         }
 
-        protected override void VisitDefinition(string name, JsonSchemaSubSchema element)
+        protected override void VisitDefinition(string name, JsonSchemaSubSchema resource)
         {
             writer.WriteStartObject(name);
-            base.VisitDefinition(name, element);
+            base.VisitDefinition(name, resource);
             writer.WriteEndObject();
         }
     }

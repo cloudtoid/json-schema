@@ -12,16 +12,16 @@
         private static readonly RecyclableMemoryStreamManager MemoryStreamManager = new RecyclableMemoryStreamManager();
 
         public static string Serialize(
-            JsonSchemaElement element,
+            JsonSchemaResource resource,
             JsonSerializerOptions? options = null)
         {
-            CheckValue(element, nameof(element));
+            CheckValue(resource, nameof(resource));
 
             using (var stream = MemoryStreamManager.GetStream())
             using (var reader = new StreamReader(stream, System.Text.Encoding.UTF8))
             using (var writer = new JsonSchemaWriter(stream, options))
             {
-                writer.Write(element);
+                writer.Write(resource);
                 writer.Flush();
                 stream.Position = 0;
                 return reader.ReadToEnd();
@@ -30,32 +30,32 @@
 
         public static async Task SerializeAsync(
             Utf8JsonWriter writer,
-            JsonSchemaElement element,
+            JsonSchemaResource resource,
             JsonSerializerOptions? options = null,
             CancellationToken cancellationToken = default)
         {
             CheckValue(writer, nameof(writer));
-            CheckValue(element, nameof(element));
+            CheckValue(resource, nameof(resource));
 
             using (var schemaWriter = new JsonSchemaWriter(writer, options))
             {
-                schemaWriter.Write(element);
+                schemaWriter.Write(resource);
                 await schemaWriter.FlushAsync(cancellationToken);
             }
         }
 
         public static async Task SerializeAsync(
             Stream stream,
-            JsonSchemaElement element,
+            JsonSchemaResource resource,
             JsonSerializerOptions? options = null,
             CancellationToken cancellationToken = default)
         {
             CheckValue(stream, nameof(stream));
-            CheckValue(element, nameof(element));
+            CheckValue(resource, nameof(resource));
 
             using (var schemaWriter = new JsonSchemaWriter(stream, options))
             {
-                schemaWriter.Write(element);
+                schemaWriter.Write(resource);
                 await schemaWriter.FlushAsync(cancellationToken);
             }
         }

@@ -49,14 +49,14 @@
         /// An object is valid against this constraint if all unchecked properties are valid against the schema defined by this value.
         /// Unchecked properties are the properties not checked by the <see cref="Properties"/> and <see cref="PatternProperties"/>.
         /// If <see cref="Properties"/> is empty and there are no matches against the patterns of <see cref="PatternProperties"/>, then
-        /// it is considered unchecked. The value of this keyword must be a valid JSON schema element (object or boolean).
+        /// it is considered unchecked. The value of this keyword must be a valid JSON schema resource (object or boolean).
         /// </summary>
         /// <remarks>
         /// To be more concise, if we have unchecked properties:
         /// <list type="bullet">
         /// <item>if the value is <see langword="true"/>, it is always valid</item>
         /// <item>if the value is <see langword="false"/>, is never valid</item>
-        /// <item>if the value contains a schema element, every property must be valid against that schema element.</item>
+        /// <item>if the value contains a schema resource, every property must be valid against that schema resource.</item>
         /// </list>
         /// </remarks>
         public virtual JsonSchemaSubSchema? AdditionalProperties { get; set; }

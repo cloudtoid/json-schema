@@ -20,7 +20,7 @@
 
         public JsonSchemaTypes(JsonSchemaDataType type)
         {
-            types = new List<JsonSchemaDataType> { type };
+            types = new List<JsonSchemaDataType>(1) { type };
         }
 
         public JsonSchemaTypes()

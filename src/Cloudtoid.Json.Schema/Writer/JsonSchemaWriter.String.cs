@@ -28,10 +28,10 @@
             base.VisitStringContentMedia(media);
         }
 
-        protected override void VisitStringContentSchema(JsonSchemaSubSchema element)
+        protected override void VisitStringContentSchema(JsonSchemaSubSchema resource)
         {
             writer.WriteStartObject(Keys.ContentSchema);
-            base.VisitStringContentSchema(element);
+            base.VisitStringContentSchema(resource);
             writer.WriteEndObject();
         }
     }

@@ -9,13 +9,13 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchemaArray"/> class.
         /// </summary>
-        /// <param name="item">All array elements are validated against this schema element.</param>
+        /// <param name="item">All array items are validated against this schema.</param>
         /// <param name="minsItems">The minimum number of items in the array instance.</param>
         /// <param name="maxItems">The maximum number of items in the array instance.</param>
         /// <param name="uniqueItems">If this keyword has boolean value <see langword="false"/>, the instance validates successfully.
-        ///     If it has boolean value <see langword="true"/>, the instance validates successfully if all of its elements are unique.
+        ///     If it has boolean value <see langword="true"/>, the instance validates successfully if all of its items are unique.
         /// </param>
-        /// <param name="contains">The schema element that should be found in the array instance.</param>
+        /// <param name="contains">The schema that should be found in the array instance.</param>
         /// <param name="minContains">The minimum number of contains matches in the array instance.</param>
         /// <param name="maxContains">The maximum number of contains matches in the array instance.</param>
         public JsonSchemaArray(
@@ -41,14 +41,14 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchemaArray"/> class.
         /// </summary>
-        /// <param name="items">Each element of the array instance validates against the schema at the same position, if any.</param>
-        /// <param name="additionalItems">Each element of the array past the length of <paramref name="items"/> is validated against this schema element.</param>
+        /// <param name="items">Each array item validates against the schema at the same position, if any.</param>
+        /// <param name="additionalItems">Each array item past the length of <paramref name="items"/> is validated against this schema.</param>
         /// <param name="minsItems">The minimum number of items in the array instance.</param>
         /// <param name="maxItems">The maximum number of items in the array instance.</param>
         /// <param name="uniqueItems">If this keyword has boolean value <see langword="false"/>, the instance validates successfully.
-        ///     If it has boolean value <see langword="true"/>, the instance validates successfully if all of its elements are unique.
+        ///     If it has boolean value <see langword="true"/>, the instance validates successfully if all of its items are unique.
         /// </param>
-        /// <param name="contains">The schema element that should be found in the array instance.</param>
+        /// <param name="contains">The schema resource that should be found in the array instance.</param>
         /// <param name="minContains">The minimum number of contains matches in the array instance.</param>
         /// <param name="maxContains">The maximum number of contains matches in the array instance.</param>
         public JsonSchemaArray(
@@ -97,9 +97,9 @@
         public virtual bool? UniqueItems { get; set; }
 
         /// <summary>
-        /// Gets or sets a JSON schema element that should be found in the array instance.
-        /// An array is valid against this element if at least one item is valid against the schema defined by this value.
-        /// The value of this keyword must be a valid JSON schema element (object or boolean).
+        /// Gets or sets a JSON schema resource that should be found in the array instance.
+        /// An array is valid against this schema if at least one item is valid against it.
+        /// The value of this keyword must be a valid JSON schema (object or boolean).
         /// </summary>
         public virtual JsonSchemaSubSchema? Contains { get; set; }
 
@@ -120,7 +120,7 @@
         /// <see cref="SetItems(IReadOnlyList{JsonSchemaSubSchema}?, JsonSchemaSubSchema?)"/> to change these values.
         /// An array is valid against this value if items are valid against the corresponding schemas provided here. This value can be:
         /// <list type="bullet">
-        /// <item>a valid JSON schema element (object or boolean), then every item must be valid against this schema. In this case,
+        /// <item>a valid JSON schema (object or boolean), then every item must be valid against this schema. In this case,
         /// this property will be set to an instance of <see cref="JsonSchemaArraySingleItem"/></item>
         /// <item>an array of valid JSON schemas, then each item must be valid against the schema defined at the same position (index).
         /// Items that don’t have a corresponding position (e.g., array contains 5 items and this value only has 3) will be considered
@@ -149,7 +149,7 @@
         /// <summary>
         /// Sets the constraints on the array items.
         /// </summary>
-        /// <param name="item">All array elements are validated against this schema element, and sets <see cref="Items"/> to an instance of
+        /// <param name="item">All array items are validated against this schema, and sets <see cref="Items"/> to an instance of
         ///     <see cref="JsonSchemaArraySingleItem"/>.</param>
         public void SetItem(JsonSchemaSubSchema? item)
         {

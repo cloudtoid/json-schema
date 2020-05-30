@@ -20,7 +20,7 @@
                 VisitStringContentSchema(media.Schema);
         }
 
-        protected virtual void VisitStringContentSchema(JsonSchemaSubSchema element)
-            => Visit(element);
+        protected virtual void VisitStringContentSchema(JsonSchemaSubSchema resource)
+            => Visit(resource);
     }
 }
