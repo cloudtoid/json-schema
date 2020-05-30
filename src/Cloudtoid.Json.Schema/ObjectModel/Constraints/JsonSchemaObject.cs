@@ -23,6 +23,11 @@
             MaxProperties = maxProperties;
         }
 
+        public JsonSchemaObject()
+            : this(null)
+        {
+        }
+
         /// <summary>
         /// Gets or sets the property collection of this object.
         /// An object is valid against this value if every property that is present in both the object and the value of this keyword,

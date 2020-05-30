@@ -9,16 +9,6 @@
         {
         }
 
-        public JsonSchemaAny(params JsonSchemaConstraint[] constraints)
-            : base(constraints)
-        {
-        }
-
-        public JsonSchemaAny(JsonSchemaConstraint constraint)
-            : base(constraint)
-        {
-        }
-
         public JsonSchemaAny()
             : base()
         {

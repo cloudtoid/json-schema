@@ -9,6 +9,12 @@
 
             // visit children
 
+            if (constraint.If is null)
+                return;
+
+            if (constraint.Then is null && constraint.Else is null)
+                return;
+
             VisitConditionalIfClause(constraint.If);
 
             if (constraint.Then != null)

@@ -1,5 +1,7 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
+    using static Contract;
+
     public readonly struct JsonSchemaContentMedia
     {
         /// <summary>
@@ -10,7 +12,7 @@
         ///     and the Schema defines the structure of the string value after decoding.</param>
         public JsonSchemaContentMedia(string mediaType, JsonSchemaSubSchema? schema = null)
         {
-            MediaType = mediaType;
+            MediaType = CheckNonEmpty(mediaType, nameof(mediaType));
             Schema = schema;
         }
 
@@ -19,7 +21,7 @@
         /// There is a list of MIME types officially registered by the IANA, but the set of types supported will be application
         /// and operating system dependent.
         /// </summary>
-        public string MediaType { get; }
+        public string? MediaType { get; }
 
         /// <summary>
         /// Gets the content schema of a string instance.

@@ -94,12 +94,15 @@
 
         public virtual TValue Value { get; set; }
 
+        // This is here to avoid boxing of a potential TValue that is a value-type. So, we are not calling into GetValue() for
+        // as much as possible to avoid the boxing.
         protected internal override bool IsNull
-            => !typeof(TValue).IsValueType && Value is null;
+            => Value is null;
 
         public static implicit operator JsonSchemaConstant<TValue>(TValue value)
             => new JsonSchemaConstant<TValue>(value);
 
-        protected internal override object? GetValue() => Value;
+        protected internal override object? GetValue()
+            => Value;
     }
 }

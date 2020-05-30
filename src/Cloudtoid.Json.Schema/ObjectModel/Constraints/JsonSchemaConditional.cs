@@ -15,7 +15,11 @@
             Else = @else;
         }
 
-        public JsonSchemaConstraint If { get; }
+        public JsonSchemaConditional()
+        {
+        }
+
+        public JsonSchemaConstraint? If { get; set; }
 
         public JsonSchemaConstraint? Then { get; set; }
 

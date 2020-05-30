@@ -75,7 +75,7 @@
         }
 
         public JsonSchemaNumeric()
-            : this(null, null, false, null, false)
+            : this(null)
         {
         }
 
@@ -113,7 +113,7 @@
         }
 
         public JsonSchemaInteger()
-            : this(null, null, false, null, false)
+            : this(null)
         {
         }
 

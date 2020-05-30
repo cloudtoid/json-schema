@@ -2,37 +2,50 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.Immutable;
+    using static Contract;
     using static KeywordsContract;
 
     public abstract class JsonSchemaElement
     {
-        private static readonly IReadOnlyList<JsonSchemaConstraint> EmptyConstraints = Array.Empty<JsonSchemaConstraint>();
-        private static readonly IReadOnlyDictionary<string, JsonSchemaSubSchema> EmptyDefinitions = ImmutableDictionary<string, JsonSchemaSubSchema>.Empty;
+        private string? anchor;
+        private IList<JsonSchemaConstraint> constraints;
 
         protected JsonSchemaElement(
             Uri? id,
             string? anchor,
             JsonSchemaMetadata? metadata,
-            IReadOnlyList<JsonSchemaConstraint>? constraints,
-            IReadOnlyDictionary<string, JsonSchemaSubSchema>? definitions)
+            IList<JsonSchemaConstraint>? constraints,
+            IDictionary<string, JsonSchemaSubSchema>? definitions)
         {
             Id = id;
-            Anchor = CheckAnchor(anchor, nameof(anchor));
-            Constraints = constraints ?? EmptyConstraints;
-            Definitions = definitions ?? EmptyDefinitions;
+            this.anchor = CheckAnchor(anchor, nameof(anchor));
             Metadata = metadata;
+            this.constraints = constraints ?? new List<JsonSchemaConstraint>();
+            Definitions = definitions;
         }
 
-        public virtual Uri? Id { get; }
+        protected JsonSchemaElement()
+        {
+            constraints = new List<JsonSchemaConstraint>();
+        }
 
-        public virtual string? Anchor { get; }
+        public virtual Uri? Id { get; set; }
 
-        public virtual JsonSchemaMetadata? Metadata { get; }
+        public virtual string? Anchor
+        {
+            get => anchor;
+            set => anchor = CheckAnchor(value, nameof(Anchor));
+        }
 
-        public virtual IReadOnlyList<JsonSchemaConstraint> Constraints { get; }
+        public virtual JsonSchemaMetadata? Metadata { get; set; }
 
-        public virtual IReadOnlyDictionary<string, JsonSchemaSubSchema> Definitions { get; }
+        public virtual IList<JsonSchemaConstraint> Constraints
+        {
+            get => constraints;
+            set => constraints = CheckValue(value, nameof(Constraints));
+        }
+
+        public virtual IDictionary<string, JsonSchemaSubSchema>? Definitions { get; set; }
 
         protected internal abstract void Accept(JsonSchemaVisitor visitor);
     }

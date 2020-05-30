@@ -22,8 +22,8 @@
             Uri? id = null,
             string? anchor = null,
             JsonSchemaMetadata? metadata = null,
-            IReadOnlyList<JsonSchemaConstraint>? constraints = null,
-            IReadOnlyDictionary<string, JsonSchemaSubSchema>? definitions = null)
+            IList<JsonSchemaConstraint>? constraints = null,
+            IDictionary<string, JsonSchemaSubSchema>? definitions = null)
             : base(id, anchor, metadata, constraints, definitions)
         {
         }

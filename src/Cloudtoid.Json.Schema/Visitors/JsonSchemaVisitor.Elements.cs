@@ -19,11 +19,11 @@
                     Visit(constraint);
             }
 
-            if (element.Definitions.Count > 0)
-                VisitDefinitions(element.Definitions);
+            if (!element.Definitions.IsNullOrEmpty())
+                VisitDefinitions(element.Definitions!);
         }
 
-        protected virtual void VisitDefinitions(IReadOnlyDictionary<string, JsonSchemaSubSchema> elements)
+        protected virtual void VisitDefinitions(IDictionary<string, JsonSchemaSubSchema> elements)
         {
             foreach (var element in elements)
                 VisitDefinition(element.Key, element.Value);

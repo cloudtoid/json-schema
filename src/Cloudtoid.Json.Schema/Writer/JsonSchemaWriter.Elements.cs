@@ -84,7 +84,7 @@
             writer.WriteString(Keys.Schema, uri);
         }
 
-        protected override void VisitDefinitions(IReadOnlyDictionary<string, JsonSchemaSubSchema> elements)
+        protected override void VisitDefinitions(IDictionary<string, JsonSchemaSubSchema> elements)
         {
             writer.WriteStartObject(Keys.Defs);
             base.VisitDefinitions(elements);

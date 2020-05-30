@@ -27,14 +27,16 @@
             Pattern = pattern;
             Format = format;
             ContentEncoding = contentEncoding;
-            ContentMedia = contentMedia;
+
+            if (contentMedia.HasValue && contentMedia.Value.MediaType != null)
+                ContentMedia = contentMedia;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchemaString"/> class.
         /// </summary>
         public JsonSchemaString()
-            : this(null, null, null, null, null, null)
+            : this(null)
         {
         }
 

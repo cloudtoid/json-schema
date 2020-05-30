@@ -9,16 +9,6 @@
         {
         }
 
-        public JsonSchemaOne(params JsonSchemaConstraint[] constraints)
-            : base(constraints)
-        {
-        }
-
-        public JsonSchemaOne(JsonSchemaConstraint constraint)
-            : base(constraint)
-        {
-        }
-
         public JsonSchemaOne()
             : base()
         {

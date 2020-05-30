@@ -4,14 +4,16 @@
     using System.Collections.Generic;
 
     /// <summary>
-    /// This is the root element in a JSON Schema. It is identical to <see cref="JsonSchemaSubSchema"/>, but has one extra property: <see cref="Version"/>.
+    /// This is the root element in a JSON Schema. It is identical to <see cref="JsonSchemaSubSchema"/>,
+    /// but has one extra property: <see cref="Version"/>.
     /// </summary>
     public class JsonSchema : JsonSchemaElement
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchema"/> class.
         /// </summary>
-        /// <param name="id">It identifies a schema resource with its canonical URI. The root schema of a JSON Schema document SHOULD (not MUST) contain an id with an absolute-URI (containing a scheme, but no fragment).</param>
+        /// <param name="id">It identifies a schema resource with its canonical URI. The root schema of a JSON Schema
+        ///     document SHOULD (not MUST) contain an id with an absolute-URI (containing a scheme, but no fragment).</param>
         /// <param name="anchor">When writing schema documents with the intention to provide re-usable schemas,
         ///     it may be preferable to use a plain name fragment that is not tied to any particular structural location.
         ///     This allows a subschema to be relocated without requiring JSON Pointer references to be updated.</param>
@@ -24,8 +26,8 @@
             string? anchor = null,
             JsonSchemaMetadata? metadata = null,
             JsonSchemaVersion version = JsonSchemaVersion.Draft201909,
-            IReadOnlyList<JsonSchemaConstraint>? constraints = null,
-            IReadOnlyDictionary<string, JsonSchemaSubSchema>? definitions = null)
+            IList<JsonSchemaConstraint>? constraints = null,
+            IDictionary<string, JsonSchemaSubSchema>? definitions = null)
             : base(id, anchor, metadata, constraints, definitions)
         {
             Version = version;
@@ -34,7 +36,8 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchema"/> class.
         /// </summary>
-        /// <param name="id">It identifies a schema resource with its canonical URI.</param>
+        /// <param name="id">It identifies a schema resource with its canonical URI. The root schema of a JSON Schema
+        ///     document SHOULD (not MUST) contain an id with an absolute-URI (containing a scheme, but no fragment).</param>
         /// <param name="anchor">When writing schema documents with the intention to provide re-usable schemas,
         ///     it may be preferable to use a plain name fragment that is not tied to any particular structural location.
         ///     This allows a subschema to be relocated without requiring JSON Pointer references to be updated.</param>

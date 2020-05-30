@@ -6,29 +6,30 @@
 
     public abstract class JsonSchemaNamedConstraints : JsonSchemaConstraint, IList<JsonSchemaConstraint>
     {
-        private LazyValueList<JsonSchemaConstraint> constraints;
+        private IList<JsonSchemaConstraint> constraints;
 
         protected JsonSchemaNamedConstraints(IEnumerable<JsonSchemaConstraint> constraints)
         {
             CheckValue(constraints, nameof(constraints));
-            this.constraints = new LazyValueList<JsonSchemaConstraint>(constraints);
-        }
-
-        protected JsonSchemaNamedConstraints(JsonSchemaConstraint constraint)
-        {
-            CheckValue(constraint, nameof(constraint));
-            constraints = new LazyValueList<JsonSchemaConstraint>(constraint);
+            this.constraints = constraints.AsList();
         }
 
         protected JsonSchemaNamedConstraints()
         {
+            constraints = new List<JsonSchemaConstraint>();
+        }
+
+        public virtual IList<JsonSchemaConstraint> Constraints
+        {
+            get => constraints;
+            set => constraints = CheckValue(value, nameof(value));
         }
 
         public virtual int Count
             => constraints.Count;
 
         public bool IsReadOnly
-            => false;
+            => constraints.IsReadOnly;
 
         public virtual JsonSchemaConstraint this[int index]
         {

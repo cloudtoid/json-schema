@@ -5,18 +5,17 @@
         protected internal override void VisitTypes(JsonSchemaTypes constraint)
         {
             base.VisitTypes(constraint);
-            var types = constraint.Types;
-            var len = types.Count;
+            var len = constraint.Count;
             if (len == 1)
             {
-                writer.WriteString(Keys.Type, types[0].GetEncodedTypeName());
+                writer.WriteString(Keys.Type, constraint[0].GetEncodedTypeName());
                 return;
             }
 
             writer.WriteStartArray(Keys.Type);
 
             for (int i = 0; i < len; i++)
-                writer.WriteStringValue(types[i].GetEncodedTypeName());
+                writer.WriteStringValue(constraint[i].GetEncodedTypeName());
 
             writer.WriteEndArray();
         }

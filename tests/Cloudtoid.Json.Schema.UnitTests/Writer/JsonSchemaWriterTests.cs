@@ -15,7 +15,7 @@
                 id: new Uri("http://example.com/number.json#"),
                 constraints: new JsonSchemaConstraint[]
                 {
-                    new JsonSchemaTypes(JsonSchemaDataType.Number, JsonSchemaDataType.Integer),
+                    new JsonSchemaTypes(new[] { JsonSchemaDataType.Number, JsonSchemaDataType.Integer }),
                     new JsonSchemaNumeric(
                         12.5,
                         minimum: 10.5,
