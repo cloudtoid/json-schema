@@ -12,20 +12,14 @@
     {
         private readonly IReadOnlyList<JsonSchemaConstant> values;
 
-        public JsonSchemaEnum(IReadOnlyList<JsonSchemaConstant> values)
+        public JsonSchemaEnum(IEnumerable<JsonSchemaConstant> values)
         {
-            this.values = CheckValue(values, nameof(values));
+            this.values = CheckValue(values, nameof(values)).AsReadOnlyList();
         }
 
         public JsonSchemaEnum(params JsonSchemaConstant[] values)
             : this((IReadOnlyList<JsonSchemaConstant>)values)
         {
-        }
-
-        public JsonSchemaEnum(JsonSchemaConstant value)
-        {
-            CheckValue(value, nameof(value));
-            values = new ReadOnlyValueList<JsonSchemaConstant>(value);
         }
 
         public virtual int Count

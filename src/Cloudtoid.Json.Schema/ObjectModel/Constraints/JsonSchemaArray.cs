@@ -1,7 +1,6 @@
 ﻿namespace Cloudtoid.Json.Schema
 {
     using System.Collections.Generic;
-    using static Contract;
 
     // the following restrictions can only be applied to JSON values of type array
     public class JsonSchemaArray : JsonSchemaConstraint
@@ -19,7 +18,7 @@
         /// <param name="minContains">The minimum number of contains matches in the array instance.</param>
         /// <param name="maxContains">The maximum number of contains matches in the array instance.</param>
         public JsonSchemaArray(
-            JsonSchemaSubSchema? item = null,
+            JsonSchemaSubSchema item,
             uint? minsItems = null,
             uint? maxItems = null,
             bool? uniqueItems = null,
@@ -27,9 +26,7 @@
             uint? minContains = null,
             uint? maxContains = null)
         {
-            if (item != null)
-                Items = new JsonSchemaArraySingleItem(item);
-
+            SetItem(item);
             MinItems = minsItems;
             MaxItems = maxItems;
             UniqueItems = uniqueItems;
@@ -52,7 +49,7 @@
         /// <param name="minContains">The minimum number of contains matches in the array instance.</param>
         /// <param name="maxContains">The maximum number of contains matches in the array instance.</param>
         public JsonSchemaArray(
-            IReadOnlyList<JsonSchemaSubSchema> items,
+            IEnumerable<JsonSchemaSubSchema> items,
             JsonSchemaSubSchema? additionalItems = null,
             uint? minsItems = null,
             uint? maxItems = null,
@@ -61,7 +58,7 @@
             uint? minContains = null,
             uint? maxContains = null)
         {
-            Items = new JsonSchemaArrayArrayItems(items, additionalItems);
+            SetItems(items, additionalItems);
             MinItems = minsItems;
             MaxItems = maxItems;
             UniqueItems = uniqueItems;
@@ -117,7 +114,7 @@
 
         /// <summary>
         /// Gets the constraints on array items. Use <see cref="SetItem(JsonSchemaSubSchema?)"/> or
-        /// <see cref="SetItems(IReadOnlyList{JsonSchemaSubSchema}?, JsonSchemaSubSchema?)"/> to change these values.
+        /// <see cref="SetItems(IEnumerable{JsonSchemaSubSchema}?, JsonSchemaSubSchema?)"/> to change these values.
         /// An array is valid against this value if items are valid against the corresponding schemas provided here. This value can be:
         /// <list type="bullet">
         /// <item>a valid JSON schema (object or boolean), then every item must be valid against this schema. In this case,
@@ -131,31 +128,35 @@
         public JsonSchemaArrayItems? Items { get; private set; }
 
         /// <summary>
-        /// Sets the constraints on the array items.
+        /// Sets the constraints on each array item.
         /// <paramref name="items"/> specifies an array of valid JSON schemas that each array item must be valid against the schema defined
         ///     at the same position (index). Items that don’t have a corresponding position (e.g., array contains 5 items and this value only
         ///     has 3) will be considered valid, unless the <paramref name="additionalItems"/> is not <see langword="null"/> or empty - which
         ///     will decide the validity. In this case, <see cref="Items"/> will be set to an instance of <see cref="JsonSchemaArrayArrayItems"/>
         /// </summary>
         public void SetItems(
-            IReadOnlyList<JsonSchemaSubSchema>? items,
+            IEnumerable<JsonSchemaSubSchema>? items,
             JsonSchemaSubSchema? additionalItems = null)
         {
-            Items = items is null
-                ? null
-                : new JsonSchemaArrayArrayItems(items, additionalItems);
+            if (items is null)
+            {
+                Items = null;
+            }
+            else
+            {
+                var readOnlyItems = items.AsReadOnlyList();
+                Items = readOnlyItems.Count == 0 ? null : new JsonSchemaArrayArrayItems(readOnlyItems, additionalItems);
+            }
         }
 
         /// <summary>
-        /// Sets the constraints on the array items.
+        /// Sets the set of constraints that apply to all array items.
         /// </summary>
         /// <param name="item">All array items are validated against this schema, and sets <see cref="Items"/> to an instance of
         ///     <see cref="JsonSchemaArraySingleItem"/>.</param>
         public void SetItem(JsonSchemaSubSchema? item)
         {
-            Items = item is null
-                ? null
-                : new JsonSchemaArraySingleItem(item);
+            Items = item is null ? null : new JsonSchemaArraySingleItem(item);
         }
 
         protected internal override void Accept(JsonSchemaVisitor visitor)
@@ -171,7 +172,7 @@
     {
         internal JsonSchemaArraySingleItem(JsonSchemaSubSchema item)
         {
-            Item = CheckValue(item, nameof(item));
+            Item = item;
         }
 
         public JsonSchemaSubSchema Item { get; }
@@ -186,7 +187,7 @@
             IReadOnlyList<JsonSchemaSubSchema> items,
             JsonSchemaSubSchema? additionalItems = null)
         {
-            Items = CheckValue(items, nameof(items));
+            Items = items;
             AdditionalItems = additionalItems;
         }
 
