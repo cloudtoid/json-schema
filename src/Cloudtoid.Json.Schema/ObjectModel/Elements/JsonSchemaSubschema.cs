@@ -11,11 +11,12 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchemaSubSchema"/> class.
         /// </summary>
-        /// <inheritdoc cref="JsonSchemaResource(Uri?, string?, IEnumerable{JsonSchemaConstraint}?, string?, string?, string?, bool?, bool?, bool?, JsonSchemaConstant?, IEnumerable{JsonSchemaConstant}?, IDictionary{string, JsonSchemaSubSchema}?)"/>
+        /// <inheritdoc cref="JsonSchemaResource(Uri?, string?, IEnumerable{JsonSchemaConstraint}?, string?, string?, string?, string?, bool?, bool?, bool?, JsonSchemaConstant?, IEnumerable{JsonSchemaConstant}?, IDictionary{string, JsonSchemaSubSchema}?)"/>
         public JsonSchemaSubSchema(
             Uri? id = null,
             string? anchor = null,
             IEnumerable<JsonSchemaConstraint>? constraints = null,
+            string? reference = null,
             string? title = null,
             string? description = null,
             string? comment = null,
@@ -25,7 +26,16 @@
             JsonSchemaConstant? @default = null,
             IEnumerable<JsonSchemaConstant>? examples = null,
             IDictionary<string, JsonSchemaSubSchema>? definitions = null)
-            : base(id, anchor, constraints, title, description, comment, deprecated, readOnly, writeOnly, @default, examples, definitions)
+            : base(id, anchor, constraints, reference, title, description, comment, deprecated, readOnly, writeOnly, @default, examples, definitions)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JsonSchemaSubSchema"/> class.
+        /// </summary>
+        /// <inheritdoc cref="JsonSchemaResource(string)"/>
+        public JsonSchemaSubSchema(string reference)
+            : base(reference)
         {
         }
 
@@ -33,7 +43,7 @@
         /// Initializes a new instance of the <see cref="JsonSchemaSubSchema"/> class.
         /// </summary>
         public JsonSchemaSubSchema()
-            : this(null)
+            : base()
         {
         }
 

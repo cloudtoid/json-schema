@@ -12,6 +12,9 @@
             if (resource.Anchor != null)
                 writer.WriteString(Keys.Anchor, resource.Anchor);
 
+            if (resource.Reference != null)
+                writer.WriteString(Keys.Ref, resource.Reference);
+
             if (resource.Title != null)
                 writer.WriteString(Keys.Title, resource.Title);
 
