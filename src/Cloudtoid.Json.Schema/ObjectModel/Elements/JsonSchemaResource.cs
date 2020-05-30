@@ -39,7 +39,7 @@
             IDictionary<string, JsonSchemaSubSchema>? definitions)
         {
             Id = id;
-            this.anchor = CheckAnchor(anchor, nameof(anchor));
+            Anchor = anchor;
             this.constraints = constraints is null ? new List<JsonSchemaConstraint>() : constraints.AsMutableList();
             Title = title;
             Description = description;

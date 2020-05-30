@@ -25,8 +25,8 @@
         }
 
         public JsonSchemaObject()
-            : this(null)
         {
+            Properties = new Dictionary<string, JsonSchemaSubSchema>(StringComparer.Ordinal);
         }
 
         /// <summary>
