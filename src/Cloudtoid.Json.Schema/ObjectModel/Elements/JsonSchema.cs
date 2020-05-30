@@ -55,6 +55,14 @@
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="JsonSchema"/> class.
+        /// </summary>
+        public JsonSchema()
+            : this(null)
+        {
+        }
+
+        /// <summary>
         /// Gets the version of the JSON Schema spec that this document follows.
         /// </summary>
         public virtual JsonSchemaVersion Version { get; }

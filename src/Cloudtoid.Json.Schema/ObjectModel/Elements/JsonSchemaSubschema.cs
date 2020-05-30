@@ -46,6 +46,14 @@
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JsonSchemaSubSchema"/> class.
+        /// </summary>
+        public JsonSchemaSubSchema()
+            : this(null)
+        {
+        }
+
         protected internal override void Accept(JsonSchemaVisitor visitor)
             => visitor.VisitChildElement(this);
     }
