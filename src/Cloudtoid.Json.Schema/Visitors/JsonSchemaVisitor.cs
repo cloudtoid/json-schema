@@ -19,7 +19,7 @@
         protected internal virtual void VisitTypes(JsonSchemaTypes constraint)
             => VisitConstraint(constraint);
 
-        protected internal virtual void VisitNumber(JsonSchemaNumeric constraint)
+        protected internal virtual void VisitNumber(JsonSchemaNumber constraint)
             => VisitConstraint(constraint);
 
         protected internal virtual void VisitInteger(JsonSchemaInteger constraint)

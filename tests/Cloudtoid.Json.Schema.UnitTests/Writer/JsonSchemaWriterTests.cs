@@ -16,7 +16,7 @@
                 constraints: new JsonSchemaConstraint[]
                 {
                     new JsonSchemaTypes(new[] { JsonSchemaDataType.Number, JsonSchemaDataType.Integer }),
-                    new JsonSchemaNumeric(
+                    new JsonSchemaNumber(
                         12.5,
                         minimum: 10.5,
                         isMinimumExlusive: true,

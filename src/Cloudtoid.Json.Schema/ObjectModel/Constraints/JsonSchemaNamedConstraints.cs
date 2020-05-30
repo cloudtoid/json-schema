@@ -11,7 +11,7 @@
         protected JsonSchemaNamedConstraints(IEnumerable<JsonSchemaConstraint> constraints)
         {
             CheckValue(constraints, nameof(constraints));
-            this.constraints = constraints.AsList();
+            this.constraints = constraints.AsMutableList();
         }
 
         protected JsonSchemaNamedConstraints()
@@ -29,7 +29,7 @@
             => constraints.Count;
 
         public bool IsReadOnly
-            => constraints.IsReadOnly;
+            => false;
 
         public virtual JsonSchemaConstraint this[int index]
         {

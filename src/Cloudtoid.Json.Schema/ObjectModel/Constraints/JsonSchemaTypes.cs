@@ -15,7 +15,7 @@
         public JsonSchemaTypes(IEnumerable<JsonSchemaDataType> types)
         {
             CheckValue(types, nameof(types));
-            this.types = types.AsList();
+            this.types = types.AsMutableList();
         }
 
         public JsonSchemaTypes(JsonSchemaDataType type)
@@ -38,7 +38,7 @@
             => types.Count;
 
         public bool IsReadOnly
-            => types.IsReadOnly;
+            => false;
 
         public virtual JsonSchemaDataType this[int index]
         {

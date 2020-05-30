@@ -36,7 +36,6 @@
         /// Initializes a new instance of the <see cref="JsonSchemaString"/> class.
         /// </summary>
         public JsonSchemaString()
-            : this(null)
         {
         }
 

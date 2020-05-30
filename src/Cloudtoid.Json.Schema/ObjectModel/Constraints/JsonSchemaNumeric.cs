@@ -8,6 +8,8 @@
     public abstract class JsonSchemaNumeric<TValue> : JsonSchemaConstraint
         where TValue : struct
     {
+        private TValue? multipleOf;
+
         protected JsonSchemaNumeric(
             TValue? multipleOf,
             TValue? minimum,
@@ -26,7 +28,15 @@
         /// Gets a multiple of a given number to restrict the valid values.
         /// This uses the <c>multipleOf</c> keyword and may only be a positive number.
         /// </summary>
-        public virtual TValue? MultipleOf { get; set; }
+        public virtual TValue? MultipleOf
+        {
+            get => multipleOf;
+            set
+            {
+                ValidateMultipleOf(value);
+                multipleOf = value;
+            }
+        }
 
         /// <summary>
         /// Gets the minimum possible value of this number.
@@ -49,22 +59,24 @@
         /// Gets if the <see cref="Maximum"/> is exclusive.
         /// </summary>
         public virtual bool IsMaximumExclusive { get; set; }
+
+        protected abstract void ValidateMultipleOf(TValue? value);
     }
 
     /// <summary>
     /// A set of validation rules for number instances.
     /// </summary>
-    public class JsonSchemaNumeric : JsonSchemaNumeric<double>
+    public class JsonSchemaNumber : JsonSchemaNumeric<double>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="JsonSchemaNumeric"/> class.
+        /// Initializes a new instance of the <see cref="JsonSchemaNumber"/> class.
         /// </summary>
         /// <param name="multipleOf">A numeric instance is valid only if division by this keyword's value results in an integer.</param>
         /// <param name="minimum">The minimum value.</param>
         /// <param name="isMinimumExlusive">Indicates if the <paramref name="minimum"/> is exclusive.</param>
         /// <param name="maximum">The maximum value.</param>
         /// <param name="isMaximumExclusive">Indicates if the <paramref name="maximum"/> is exclusive.</param>
-        public JsonSchemaNumeric(
+        public JsonSchemaNumber(
             double? multipleOf = null,
             double? minimum = null,
             bool isMinimumExlusive = false,
@@ -74,15 +86,15 @@
         {
         }
 
-        public JsonSchemaNumeric()
+        public JsonSchemaNumber()
             : this(null)
         {
         }
 
-        public override double? MultipleOf
+        protected override void ValidateMultipleOf(double? value)
         {
-            get => base.MultipleOf;
-            set => base.MultipleOf = value is null ? null : (double?)CheckGreaterThan(value.Value, 0.0, nameof(MultipleOf));
+            if (value != null)
+                CheckGreaterThan(value.Value, 0.0, nameof(MultipleOf));
         }
 
         protected internal override void Accept(JsonSchemaVisitor visitor)
@@ -117,10 +129,10 @@
         {
         }
 
-        public override long? MultipleOf
+        protected override void ValidateMultipleOf(long? value)
         {
-            get => base.MultipleOf;
-            set => base.MultipleOf = value is null ? null : (long?)CheckGreaterThan(value.Value, 0L, nameof(MultipleOf));
+            if (value != null)
+                CheckGreaterThan(value.Value, 0L, nameof(MultipleOf));
         }
 
         protected internal override void Accept(JsonSchemaVisitor visitor)

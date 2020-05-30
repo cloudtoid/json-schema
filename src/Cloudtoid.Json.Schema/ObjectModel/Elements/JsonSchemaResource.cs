@@ -40,7 +40,7 @@
         {
             Id = id;
             this.anchor = CheckAnchor(anchor, nameof(anchor));
-            this.constraints = constraints is null ? new List<JsonSchemaConstraint>() : constraints.AsList();
+            this.constraints = constraints is null ? new List<JsonSchemaConstraint>() : constraints.AsMutableList();
             Title = title;
             Description = description;
             Comment = comment;
@@ -48,7 +48,7 @@
             ReadOnly = readOnly;
             WriteOnly = writeOnly;
             Default = @default;
-            Examples = examples.AsListOrDefault();
+            Examples = examples?.AsMutableList();
             Definitions = definitions;
         }
 

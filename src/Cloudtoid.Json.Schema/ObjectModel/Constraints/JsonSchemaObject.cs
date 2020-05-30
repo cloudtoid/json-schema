@@ -11,7 +11,7 @@
             IDictionary<string, JsonSchemaSubSchema>? patternProperties = null,
             JsonSchemaSubSchema? additionalProperties = null,
             JsonSchemaString? propertyNames = null,
-            ISet<string>? requiredProperties = null,
+            IEnumerable<string>? requiredProperties = null,
             uint? minProperties = null,
             uint? maxProperties = null)
         {
@@ -19,7 +19,7 @@
             PatternProperties = patternProperties;
             AdditionalProperties = additionalProperties;
             PropertyNames = propertyNames;
-            RequiredProperties = requiredProperties;
+            RequiredProperties = requiredProperties.AsSetOrDefault(StringComparer.Ordinal);
             MinProperties = minProperties;
             MaxProperties = maxProperties;
         }
