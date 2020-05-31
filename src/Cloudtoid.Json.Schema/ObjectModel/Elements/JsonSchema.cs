@@ -12,31 +12,22 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchema"/> class.
         /// </summary>
-        /// <inheritdoc cref="JsonSchemaResource(Uri?, string?, IEnumerable{JsonSchemaConstraint}?, string?, string?, string?, string?, bool?, bool?, bool?, JsonSchemaConstant?, IEnumerable{JsonSchemaConstant}?, IDictionary{string, JsonSchemaSubSchema}?)"/>
+        /// <inheritdoc cref="JsonSchemaResource(Uri?, string?, IEnumerable{JsonSchemaConstraint}?, string?, string?, string?, bool?, bool?, bool?, bool?, JsonSchemaConstant?, IEnumerable{JsonSchemaConstant}?, IDictionary{string, JsonSchemaSubSchema}?)"/>
         public JsonSchema(
             Uri? id = null,
             string? anchor = null,
             IEnumerable<JsonSchemaConstraint>? constraints = null,
-            string? reference = null,
             string? title = null,
             string? description = null,
             string? comment = null,
             bool? deprecated = null,
             bool? readOnly = null,
             bool? writeOnly = null,
+            bool? recursiveAnchor = null,
             JsonSchemaConstant? @default = null,
             IEnumerable<JsonSchemaConstant>? examples = null,
             IDictionary<string, JsonSchemaSubSchema>? definitions = null)
-            : base(id, anchor, constraints, reference, title, description, comment, deprecated, readOnly, writeOnly, @default, examples, definitions)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JsonSchema"/> class.
-        /// </summary>
-        /// <inheritdoc cref="JsonSchemaResource(string)"/>
-        public JsonSchema(string reference)
-            : base(reference)
+            : base(id, anchor, constraints, title, description, comment, deprecated, readOnly, writeOnly, recursiveAnchor, @default, examples, definitions)
         {
         }
 

@@ -11,3 +11,4 @@ Go through the spec here: https://json-schema.org/draft/2019-09/json-schema-vali
 10) How to determine the base URI: https://json-schema.org/draft/2019-09/json-schema-core.html#initial-base
 11) Add support for $recursiveRef, and $recursiveAnchor
 12) Add a check for the string of all dictionaries such as Definitions and Properties.
+13) override JsonSchemaOverride.Definitions

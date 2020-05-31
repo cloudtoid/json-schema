@@ -12,8 +12,8 @@
             if (resource.Anchor != null)
                 writer.WriteString(Keys.Anchor, resource.Anchor);
 
-            if (resource.Reference != null)
-                writer.WriteString(Keys.Ref, resource.Reference);
+            if (resource.RecursiveAnchor != null)
+                writer.WriteBoolean(Keys.RecursiveAnchor, resource.RecursiveAnchor.Value);
 
             if (resource.Title != null)
                 writer.WriteString(Keys.Title, resource.Title);

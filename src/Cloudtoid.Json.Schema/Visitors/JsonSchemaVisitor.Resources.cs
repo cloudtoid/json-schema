@@ -34,5 +34,8 @@
 
         protected internal virtual void VisitSubschema(JsonSchemaSubSchema resource)
             => VisitResource(resource);
+
+        internal void VisitOverride(JsonSchemaOverride resource)
+            => VisitSubschema(resource);
     }
 }

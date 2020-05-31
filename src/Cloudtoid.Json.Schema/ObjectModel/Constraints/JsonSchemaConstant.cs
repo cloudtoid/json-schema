@@ -92,7 +92,7 @@
             Value = value;
         }
 
-        public virtual TValue Value { get; set; }
+        public virtual TValue Value { get; }
 
         // This is here to avoid boxing of a potential TValue that is a value-type. So, we are not calling into GetValue() for
         // as much as possible to avoid the boxing.
