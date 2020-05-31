@@ -6,7 +6,7 @@
     public class JsonSchemaOverride : JsonSchemaSubSchema
     {
         private JsonSchemaSubSchema? schema;
-        private IList<JsonSchemaConstraint>? constraints;
+        private JsonSchemaConstraints? constraints;
 
         public JsonSchemaOverride(
             JsonSchemaSubSchema originalSchema,
@@ -40,7 +40,7 @@
         }
 
         /// <inheritdoc/>
-        public override IList<JsonSchemaConstraint> Constraints
+        public override JsonSchemaConstraints Constraints
         {
             get => constraints ?? base.Constraints;
             set => throw new InvalidOperationException($"{nameof(Constraints)} is a read-only property");

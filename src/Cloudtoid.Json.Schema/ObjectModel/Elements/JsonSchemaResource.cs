@@ -8,7 +8,7 @@
     public abstract class JsonSchemaResource
     {
         private string? anchor;
-        private IList<JsonSchemaConstraint> constraints;
+        private JsonSchemaConstraints constraints;
 
         /// <param name="id">It identifies a schema resource with its canonical URI.</param>
         /// <param name="anchor">When writing schema documents with the intention to provide re-usable schemas,
@@ -91,7 +91,7 @@
         /// <summary>
         /// Gets or sets the constraints that apply to this schema resource.
         /// </summary>
-        public virtual IList<JsonSchemaConstraint> Constraints
+        public virtual JsonSchemaConstraints Constraints
         {
             get => constraints;
             set => constraints = CheckValue(value, nameof(Constraints));

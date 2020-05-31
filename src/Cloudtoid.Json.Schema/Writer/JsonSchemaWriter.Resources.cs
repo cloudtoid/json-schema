@@ -95,5 +95,15 @@
             base.VisitDefinition(name, resource);
             writer.WriteEndObject();
         }
+
+        protected override void VisitConstraints(JsonSchemaConstraints constraints)
+        {
+            var newConstraints = constraints.NewConstraints;
+            if (newConstraints != null)
+            {
+                foreach (var constraint in newConstraints)
+                    Visit(constraint);
+            }
+        }
     }
 }

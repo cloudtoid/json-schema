@@ -9,15 +9,17 @@
 
         protected virtual void VisitResource(JsonSchemaResource resource)
         {
-            var constraints = resource.Constraints;
-            if (constraints.Count > 0)
-            {
-                foreach (var constraint in constraints)
-                    Visit(constraint);
-            }
+            if (resource.Constraints.Count > 0)
+                VisitConstraints(resource.Constraints);
 
             if (!resource.Definitions.IsNullOrEmpty())
                 VisitDefinitions(resource.Definitions);
+        }
+
+        protected virtual void VisitConstraints(JsonSchemaConstraints constraints)
+        {
+            foreach (var constraint in constraints)
+                Visit(constraint);
         }
 
         protected virtual void VisitDefinitions(IDictionary<string, JsonSchemaSubSchema> resources)
@@ -35,7 +37,7 @@
         protected internal virtual void VisitSubschema(JsonSchemaSubSchema resource)
             => VisitResource(resource);
 
-        internal void VisitOverride(JsonSchemaOverride resource)
+        protected internal virtual void VisitOverride(JsonSchemaOverride resource)
             => VisitSubschema(resource);
     }
 }

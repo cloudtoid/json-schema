@@ -5,13 +5,13 @@
     using System.Collections.Generic;
     using static Contract;
 
-    internal class JsonSchemaConstraints : IList<JsonSchemaConstraint>
+    public class JsonSchemaConstraints : IList<JsonSchemaConstraint>
     {
         private readonly bool readOnlyConstraints;
         private IList<JsonSchemaConstraint>? constraints;
         private IList<JsonSchemaConstraint>? overrides;
 
-        internal JsonSchemaConstraints(IEnumerable<JsonSchemaConstraint>? constraints = null)
+        public JsonSchemaConstraints(IEnumerable<JsonSchemaConstraint>? constraints = null)
         {
             if (constraints != null)
                 this.constraints = constraints.AsMutableList();
@@ -27,6 +27,9 @@
             if (overrides != null)
                 this.overrides = overrides.AsMutableList();
         }
+
+        public virtual IList<JsonSchemaConstraint>? NewConstraints
+            => readOnlyConstraints ? overrides : constraints;
 
         public int Count
             => (constraints?.Count + overrides?.Count) ?? 0;
