@@ -31,10 +31,10 @@
         public virtual IEnumerator<JsonSchemaConstant> GetEnumerator()
             => values.GetEnumerator();
 
-        protected internal override void Accept(JsonSchemaVisitor visitor)
-            => visitor.VisitEnum(this);
-
         IEnumerator IEnumerable.GetEnumerator()
             => values.GetEnumerator();
+
+        protected internal override void Accept(JsonSchemaVisitor visitor)
+            => visitor.VisitEnum(this);
     }
 }

@@ -11,7 +11,8 @@
         private IList<JsonSchemaConstraint>? constraints;
         private IList<JsonSchemaConstraint>? overrides;
 
-        public JsonSchemaConstraints(IEnumerable<JsonSchemaConstraint>? constraints = null)
+        public JsonSchemaConstraints(
+            IEnumerable<JsonSchemaConstraint>? constraints = null)
         {
             if (constraints != null)
                 this.constraints = constraints.AsMutableList();
