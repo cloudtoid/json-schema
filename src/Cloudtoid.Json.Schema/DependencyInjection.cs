@@ -1,9 +1,9 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System.Diagnostics;
-    using Microsoft.Extensions.DependencyInjection;
-    using static Contract;
+﻿using System.Diagnostics;
+using Microsoft.Extensions.DependencyInjection;
+using static Cloudtoid.Contract;
 
+namespace Cloudtoid.Json.Schema
+{
     [DebuggerStepThrough]
     public static class DependencyInjection
     {

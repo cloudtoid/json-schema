@@ -1,7 +1,7 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace Cloudtoid.Json.Schema
+{
     public class JsonSchemaAll : JsonSchemaNamedConstraints
     {
         public JsonSchemaAll(IEnumerable<JsonSchemaConstraint> constraints)

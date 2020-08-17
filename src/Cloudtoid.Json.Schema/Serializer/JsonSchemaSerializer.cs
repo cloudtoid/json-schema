@@ -1,12 +1,12 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System.IO;
-    using System.Text.Json;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Microsoft.IO;
-    using static Contract;
+﻿using System.IO;
+using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.IO;
+using static Cloudtoid.Contract;
 
+namespace Cloudtoid.Json.Schema
+{
     public static class JsonSchemaSerializer
     {
         private static readonly RecyclableMemoryStreamManager MemoryStreamManager = new RecyclableMemoryStreamManager();

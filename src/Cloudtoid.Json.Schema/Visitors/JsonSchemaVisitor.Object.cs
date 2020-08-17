@@ -1,7 +1,7 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace Cloudtoid.Json.Schema
+{
     public abstract partial class JsonSchemaVisitor
     {
         protected internal virtual void VisitObject(JsonSchemaObject constraint)

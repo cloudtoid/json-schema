@@ -1,7 +1,7 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System.Text.Json;
+﻿using System.Text.Json;
 
+namespace Cloudtoid.Json.Schema
+{
     internal static class JsonSchemaWriterHelpers
     {
         private static readonly JsonEncodedText[] TypeNames;

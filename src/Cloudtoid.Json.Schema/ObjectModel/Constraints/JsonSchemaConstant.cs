@@ -1,7 +1,7 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System;
+﻿using System;
 
+namespace Cloudtoid.Json.Schema
+{
     public abstract class JsonSchemaConstant : JsonSchemaConstraint
     {
         public static readonly JsonSchemaConstant Null = new JsonSchemaConstant<object?>(null);

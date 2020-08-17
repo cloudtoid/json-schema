@@ -1,12 +1,12 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System;
-    using System.IO;
-    using System.Text.Json;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using static Contract;
+﻿using System;
+using System.IO;
+using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
+using static Cloudtoid.Contract;
 
+namespace Cloudtoid.Json.Schema
+{
     /// <summary>
     /// Provides a high-performance API for forward-only, non-cached writing of UTF-8 encoded JSON Schema text.
     /// </summary>

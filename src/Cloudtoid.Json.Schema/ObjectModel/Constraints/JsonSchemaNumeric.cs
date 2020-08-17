@@ -1,7 +1,7 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using static Contract;
+﻿using static Cloudtoid.Contract;
 
+namespace Cloudtoid.Json.Schema
+{
     /// <summary>
     /// Provides the base class for validation rules for numeric instances (Integer and Number)
     /// </summary>

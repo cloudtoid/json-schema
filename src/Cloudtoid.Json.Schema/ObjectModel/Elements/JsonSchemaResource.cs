@@ -1,10 +1,10 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System;
-    using System.Collections.Generic;
-    using static Contract;
-    using static KeywordsContract;
+﻿using System;
+using System.Collections.Generic;
+using static Cloudtoid.Contract;
+using static Cloudtoid.Json.Schema.KeywordsContract;
 
+namespace Cloudtoid.Json.Schema
+{
     public abstract class JsonSchemaResource
     {
         private string? anchor;

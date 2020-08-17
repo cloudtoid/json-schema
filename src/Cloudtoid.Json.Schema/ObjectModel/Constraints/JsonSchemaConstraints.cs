@@ -1,10 +1,10 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using static Contract;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using static Cloudtoid.Contract;
 
+namespace Cloudtoid.Json.Schema
+{
     public class JsonSchemaConstraints : IList<JsonSchemaConstraint>
     {
         private readonly bool readOnlyConstraints;

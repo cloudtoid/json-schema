@@ -1,8 +1,8 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace Cloudtoid.Json.Schema
+{
     // the following restrictions can only be applied to JSON values of type object
     public class JsonSchemaObject : JsonSchemaConstraint
     {

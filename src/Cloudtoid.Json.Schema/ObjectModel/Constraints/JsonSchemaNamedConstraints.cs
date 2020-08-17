@@ -1,9 +1,9 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System.Collections;
-    using System.Collections.Generic;
-    using static Contract;
+﻿using System.Collections;
+using System.Collections.Generic;
+using static Cloudtoid.Contract;
 
+namespace Cloudtoid.Json.Schema
+{
     public abstract class JsonSchemaNamedConstraints : JsonSchemaConstraint, IList<JsonSchemaConstraint>
     {
         private IList<JsonSchemaConstraint> constraints;

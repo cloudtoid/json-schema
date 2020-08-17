@@ -1,7 +1,7 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using static Contract;
+﻿using static Cloudtoid.Contract;
 
+namespace Cloudtoid.Json.Schema
+{
     public class JsonSchemaConditional : JsonSchemaConstraint
     {
         public JsonSchemaConditional(

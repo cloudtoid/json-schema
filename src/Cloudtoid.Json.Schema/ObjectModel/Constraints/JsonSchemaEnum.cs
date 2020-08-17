@@ -1,9 +1,9 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System.Collections;
-    using System.Collections.Generic;
-    using static Contract;
+﻿using System.Collections;
+using System.Collections.Generic;
+using static Cloudtoid.Contract;
 
+namespace Cloudtoid.Json.Schema
+{
     /// <summary>
     /// Provides enum style validation.
     /// A JSON validates successfully if it is equal to one of the enum values .

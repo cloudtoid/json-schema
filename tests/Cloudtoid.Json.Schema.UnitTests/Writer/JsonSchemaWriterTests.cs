@@ -1,10 +1,10 @@
-﻿namespace Cloudtoid.Json.Schema.UnitTests
-{
-    using System;
-    using System.Text.Json;
-    using FluentAssertions;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Text.Json;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+namespace Cloudtoid.Json.Schema.UnitTests
+{
     [TestClass]
     public sealed class JsonSchemaWriterTests
     {

@@ -1,7 +1,7 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System.Text.Json;
+﻿using System.Text.Json;
 
+namespace Cloudtoid.Json.Schema
+{
     public sealed partial class JsonSchemaWriter
     {
         private static class Keys

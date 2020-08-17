@@ -1,9 +1,9 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System.Collections;
-    using System.Collections.Generic;
-    using static Contract;
+﻿using System.Collections;
+using System.Collections.Generic;
+using static Cloudtoid.Contract;
 
+namespace Cloudtoid.Json.Schema
+{
     /// <summary>
     /// Provides data type validation.
     /// An instance is valid if and only if the instance is of any of the types listed here.

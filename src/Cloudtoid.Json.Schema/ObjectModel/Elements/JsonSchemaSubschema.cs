@@ -1,8 +1,8 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace Cloudtoid.Json.Schema
+{
     /// <summary>
     /// This represents all JSON Schema resources except for the root schema resource which is <see cref="JsonSchema"/>.
     /// </summary>

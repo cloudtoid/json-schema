@@ -1,9 +1,9 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
+namespace Cloudtoid.Json.Schema
+{
     public static class JsonSchemaVersionLookup
     {
         private const string Draft201909 = "http://json-schema.org/draft/2019-09/schema#";

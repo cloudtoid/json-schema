@@ -1,8 +1,8 @@
-﻿namespace Cloudtoid.Json.Schema
-{
-    using System.Text.RegularExpressions;
-    using static Contract;
+﻿using System.Text.RegularExpressions;
+using static Cloudtoid.Contract;
 
+namespace Cloudtoid.Json.Schema
+{
     internal static class KeywordsContract
     {
         private static readonly RegexOptions RegexOption =
