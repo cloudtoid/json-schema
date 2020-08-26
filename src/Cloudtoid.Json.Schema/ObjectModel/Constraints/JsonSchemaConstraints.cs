@@ -159,7 +159,7 @@ namespace Cloudtoid.Json.Schema
         {
             CheckValue(item, nameof(item));
 
-            int index = 0;
+            var index = 0;
             if (constraints != null)
             {
                 var i = constraints.IndexOf(item);
@@ -233,7 +233,7 @@ namespace Cloudtoid.Json.Schema
             public bool MoveNext()
             {
                 var constraints = parent.constraints;
-                int index = this.index;
+                var index = this.index;
                 if (constraints != null)
                 {
                     if (index < constraints.Count)
